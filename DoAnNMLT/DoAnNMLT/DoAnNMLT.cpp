@@ -2,18 +2,18 @@
 #include <string.h>
 #include "Header.h"
 
-#define MAX_DOC_GIA 1000
+
 int index = 0;
 // Các mảng lưu trữ thông tin độc giả
 int maDocGia[MAX_DOC_GIA];
-char hoTen[MAX_DOC_GIA][100];
-char cmnd[MAX_DOC_GIA][20];
-char ngayThangNamSinh[MAX_DOC_GIA][30];
-char gioiTinh[MAX_DOC_GIA][30];
-char email[MAX_DOC_GIA][50];
-char diaChi[MAX_DOC_GIA][50];
-char ngayMoThe[MAX_DOC_GIA][30];
-char ngayKetThucThe[MAX_DOC_GIA][50];
+char hoTen[MAX_DOC_GIA][MAX_STR];
+char cmnd[MAX_DOC_GIA][MAX_STR];
+char ngayThangNamSinh[MAX_DOC_GIA][MAX_STR];
+char gioiTinh[MAX_DOC_GIA][MAX_STR];
+char email[MAX_DOC_GIA][MAX_STR];
+char diaChi[MAX_DOC_GIA][MAX_STR];
+char ngayMoThe[MAX_DOC_GIA][MAX_STR];
+char ngayKetThucThe[MAX_DOC_GIA][MAX_STR];
 void hienThiPoster() {
 	printf("*****************************************************\n");
 	printf("*                                                   *\n");
@@ -38,8 +38,8 @@ void showMenu() {
 	printf("4. Lap phieu tra sach\n");
 	printf("5. Cac thong ke co ban\n");
 	printf("Nhap lua chon cua ban: ");
-	char choice[1];
-	gets_s(choice);
+	char choice[2]; // Kích thước 10 ký tự (9 ký tự + 1 null terminator)
+    gets_s(choice, 2);
 
 	switch (choice[0]) {
 	case '1': {
@@ -51,17 +51,17 @@ void showMenu() {
 		printf("   d. Xoa thong tin mot doc gia\n");
 		printf("   e. Tim kiem doc gia theo CMND\n");
 		printf("   f. Tim kiem sach theo ho ten\n");
-		char subChoice[1];
-		gets_s( subChoice);
+		char subChoice[2];
+		gets_s( subChoice, 2);
 		
 		switch (subChoice[0]) {
 		/*case 'a':
 			printf( "Xem danh sach doc gia trong thu vien.\n" );
 			hienThiDanhSachDocGia(maDocGia, hoTen, cmnd, email, index);
 			break;*/
-		case 'b':
-			printf( "Them doc gia.\n" );
-			themDocGia(maDocGia, hoTen, cmnd, email, &index);
+				case 'b':
+			printf("Them doc gia.\n");
+			themDocGia(maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe, &index);
 			break;
 		/*case 'c':
 			printf( "Chinh sua thong tin mot doc gia." );
@@ -216,11 +216,8 @@ void showMenu() {
 
 int main()
 {
-	/*hienThiPoster();
-	showMenu();*/
-	/*
+	hienThiPoster();
+	showMenu();
 
-char *result = Time();
-	printf("Ngay thang nam: %s\n", result);*/
 	return 0;
 }
