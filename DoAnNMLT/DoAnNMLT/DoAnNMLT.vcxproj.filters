@@ -18,5 +18,19 @@
     <ClCompile Include="DoAnNMLT.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="quan_ly_doc_gia.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Quan_ly_sach.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Header.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
