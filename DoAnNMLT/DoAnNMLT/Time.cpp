@@ -50,8 +50,8 @@ char* Time() {
     int ngay, thang, nam;
 
     while (1) {
-        printf("Nhap ngay, thang, nam: ");
-        scanf_s("%d %d %d", &ngay, &thang, &nam);
+        printf("Nhap ngay, thang, nam voi format: dd-mm-yyyy. vi du: 29-03-2025");
+        scanf_s("%d-%d-%d", &ngay, &thang, &nam);
 
         // Kiểm tra tháng hợp lệ
         if (thang < 1 || thang > 12) {

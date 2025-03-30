@@ -8,7 +8,12 @@ int index = 0;
 int maDocGia[MAX_DOC_GIA];
 char hoTen[MAX_DOC_GIA][100];
 char cmnd[MAX_DOC_GIA][20];
+char ngayThangNamSinh[MAX_DOC_GIA][30];
+char gioiTinh[MAX_DOC_GIA][30];
 char email[MAX_DOC_GIA][50];
+char diaChi[MAX_DOC_GIA][50];
+char ngayMoThe[MAX_DOC_GIA][30];
+char ngayKetThucThe[MAX_DOC_GIA][50];
 void hienThiPoster() {
 	printf("*****************************************************\n");
 	printf("*                                                   *\n");
