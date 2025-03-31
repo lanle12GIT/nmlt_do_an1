@@ -1,8 +1,9 @@
 ﻿#include <stdio.h>
 #include <string.h>
-#include "Header.h"
+#include "HeaderDocGia.h"
+#include "HeaderSach.h"
 
-int index = 0;
+int indexDocGia = 0;
 // Các mảng lưu trữ thông tin độc giả
 int maDocGia[MAX_DOC_GIA];
 char hoTen[MAX_DOC_GIA][MAX_STR];
@@ -13,6 +14,18 @@ char email[MAX_DOC_GIA][MAX_STR];
 char diaChi[MAX_DOC_GIA][MAX_STR];
 char ngayMoThe[MAX_DOC_GIA][MAX_STR];
 char ngayKetThucThe[MAX_DOC_GIA][MAX_STR];
+
+int indexSach = 0;
+// Các mảng lưu trữ thông tin sách
+int ISBN[MAX_SACH];
+char tenSach[MAX_SACH][MAX_STR];
+char tacGia[MAX_SACH][MAX_STR];
+char nhaXuatBan[MAX_SACH][MAX_STR];
+int namXuatBan[MAX_SACH];
+char theLoai[MAX_SACH][MAX_STR];
+float giaSach[MAX_SACH];
+int soLuongSach[MAX_SACH];
+
 void hienThiPoster()
 {
 	printf("*****************************************************\n");
@@ -66,27 +79,27 @@ void showMenu()
 			{
 			case 'a':
 				printf("Xem danh sach doc gia trong thu vien.\n");
-				hienThiTatCaDocGia(index, maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe);
+				hienThiTatCaDocGia(indexDocGia, maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe);
 				break;
 			case 'b':
 				printf("Them doc gia.\n");
-				themDocGia(maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe, &index);
+				themDocGia(maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe, &indexDocGia);
 				break;
 			case 'c':
 				printf("Chinh sua thong tin mot doc gia.\n");
-				chinhSuaDocGia(maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe, index);
+				chinhSuaDocGia(maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe, indexDocGia);
 				break;
 			case 'd':
 				printf("Xoa thong tin mot doc gia.\n");
-				xoaDocGia(maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe, &index);
+				xoaDocGia(maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe, &indexDocGia);
 				break;
 			case 'e':
 				printf("Tim kiem doc gia theo CMND.\n");
-				timKiemDocGiaTheoCMND(maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe, index);
+				timKiemDocGiaTheoCMND(maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe, indexDocGia);
 				break;
 			case 'f':
-				printf( "Tim kiem doc gia theo ho ten.\n" );
-				timKiemDocGiaTheoHoTen(maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe, index);
+				printf("Tim kiem doc gia theo ho ten.\n");
+				timKiemDocGiaTheoHoTen(maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe, indexDocGia);
 				break;
 			case 'g':
 				isBreak = true;
@@ -104,47 +117,57 @@ void showMenu()
 	}
 	case '2':
 	{
-		printf("\n---------------------------------\n");
-		printf("------Quan li sach.-----\n");
-		printf(">>>>>Nhap lua chon (a-f): \n");
-		printf("   a. Xem danh sach cac sach trong thu vien\n");
-		printf("   b. Them sach\n");
-		printf("   c. Chinh sua thong tin mot quyen sach\n");
-		printf("   d. Xoa thong tin sach\n");
-		printf("   e. Tim kiem sach theo ISBN\n");
-		printf("   f. Tim kiem sach theo ten sach\n");
-		/*char subChoice;
-		cin >> subChoice;
-		switch (subChoice) {
-		case 'a':
-			printf( "Xem danh sach cac sach trong thu vien." );
-			viewBooks(arrBooks, m);
-			break;
-		case 'b':
-			printf( "Them sach." );
-			addBook(arrBooks, m);
-			break;
-		case 'c':
-			printf( "Chinh sua thong tin mot quyen sach." );
-			updateBook(arrBooks, m);
-			break;
-		case 'd':
-			printf( "Xoa thong tin sach." );
-			deleteBook(arrBooks, m);
-			break;
-		case 'e':
-			printf( "Tim kiem sach theo ISBN." );
-			findBookByISBN(arrBooks, m);
-			break;
-		case 'f':
-			printf( "Tim kiem sach theo ten sach." );
-			findBookByName(arrBooks, m);
-			break;
-		default:
-			printf( "Lua chon khong hop le!" );
-			break;
+		while (1)
+		{
+			/* code */
+
+			printf("\n---------------------------------\n");
+			printf("------Quan li sach.-----\n");
+			printf(">>>>>Nhap lua chon (a-f): \n");
+			printf("   a. Xem danh sach cac sach trong thu vien\n");
+			printf("   b. Them sach\n");
+			printf("   c. Chinh sua thong tin mot quyen sach\n");
+			printf("   d. Xoa thong tin sach\n");
+			printf("   e. Tim kiem sach theo ISBN\n");
+			printf("   f. Tim kiem sach theo ten sach\n");
+			printf("   g. Thoat\n");
+			char choice[2]; // Kích thước 2 ký tự (1 ký tự + 1 null terminator)
+			gets_s(choice, 2);
+			bool isBreak = false;
+			switch (choice[0])
+			{
+			case 'a':
+				printf("Xem danh sach cac sach trong thu vien.");
+				hienThiTatCaSach( ISBN, tenSach, tacGia,nhaXuatBan,namXuatBan,theLoai,giaSach,soLuongSach,indexSach );
+				break;
+			case 'b':
+				printf("Them sach.");
+
+				break;
+			case 'c':
+				printf("Chinh sua thong tin mot quyen sach.");
+
+				break;
+			case 'd':
+				printf("Xoa thong tin sach.");
+
+				break;
+			case 'e':
+				printf("Tim kiem sach theo ISBN.");
+
+				break;
+			case 'f':
+				printf("Tim kiem sach theo ten sach.");
+
+				break;
+			case 'g':
+				isBreak = true;
+				break;
+			default:
+				printf("Lua chon khong hop le!");
+				break;
+			}
 		}
-		break;*/
 		break;
 	}
 	case '3':
@@ -232,7 +255,7 @@ void showMenu()
 int main()
 {
 	hienThiPoster();
-	index = 5;
+	indexDocGia = 5;
 	maDocGia[0] = 1001;
 	strcpy_s(hoTen[0], "Nguyen Van A");
 	strcpy_s(cmnd[0], "123456789");
@@ -282,6 +305,52 @@ int main()
 	strcpy_s(diaChi[4], "Can Tho");
 	strcpy_s(ngayMoThe[4], "05-05-2024");
 	strcpy_s(ngayKetThucThe[4], "05-05-2028");
+
+	indexSach = 5;
+    ISBN[0] = 1111;
+    strcpy_s(tenSach[0], "Lap Trinh C++");
+    strcpy_s(tacGia[0], "Nguyen Van A");
+    strcpy_s(nhaXuatBan[0], "NXB Tre");
+    namXuatBan[0] = 2020;
+    strcpy_s(theLoai[0], "Lap Trinh");
+    giaSach[0] = 150000.0;
+    soLuongSach[0] = 10;
+
+    ISBN[1] = 2222;
+    strcpy_s(tenSach[1], "Lap Trinh Java");
+    strcpy_s(tacGia[1], "Tran Thi B");
+    strcpy_s(nhaXuatBan[1], "NXB Giao Duc");
+    namXuatBan[1] = 2021;
+    strcpy_s(theLoai[1], "Lap Trinh");
+    giaSach[1] = 200000.0;
+    soLuongSach[1] = 15;
+
+    ISBN[2] = 3333;
+    strcpy_s(tenSach[2], "Lap Trinh Python");
+    strcpy_s(tacGia[2], "Le Van C");
+    strcpy_s(nhaXuatBan[2], "NXB Kim Dong");
+    namXuatBan[2] = 2019;
+    strcpy_s(theLoai[2], "Lap Trinh");
+    giaSach[2] = 180000.0;
+    soLuongSach[2] = 8;
+
+    ISBN[3] = 4444;
+    strcpy_s(tenSach[3], "Thuat Toan");
+    strcpy_s(tacGia[3], "Pham Thi D");
+    strcpy_s(nhaXuatBan[3], "NXB Tre");
+    namXuatBan[3] = 2018;
+    strcpy_s(theLoai[3], "Khoa Hoc");
+    giaSach[3] = 250000.0;
+    soLuongSach[3] = 5;
+
+    ISBN[4] = 5555;
+    strcpy_s(tenSach[4], "Co So Du Lieu");
+    strcpy_s(tacGia[4], "Hoang Van E");
+    strcpy_s(nhaXuatBan[4], "NXB Giao Duc");
+    namXuatBan[4] = 2022;
+    strcpy_s(theLoai[4], "Cong Nghe");
+    giaSach[4] = 300000.0;
+    soLuongSach[4] = 12;
 
 	showMenu();
 

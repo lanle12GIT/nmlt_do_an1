@@ -1,6 +1,6 @@
 ﻿#include <stdio.h>
 #include <string.h>
-#include "Header.h"
+#include "HeaderDocGia.h"
 
 // Hàm tính ngày kết thúc thẻ (cộng thêm 4 năm)
 void tinhNgayKetThucThe(const char ngayMoThe[], char ngayKetThucThe[])
@@ -21,49 +21,49 @@ void themDocGia(
     char ngayThangNamSinh[][MAX_STR], char gioiTinh[][MAX_STR],
     char email[][MAX_STR], char diaChi[][MAX_STR],
     char ngayMoThe[][MAX_STR], char ngayKetThucThe[][MAX_STR],
-    int *index)
+    int *indexDocGia)
 {
-    if (*index >= MAX_DOC_GIA)
+    if (*indexDocGia >= MAX_DOC_GIA)
     {
         printf("Khong the them doc gia moi. So luong doc gia da dat toi da.\n");
         return;
     }
-    if (*index == 0){
-        maDocGia[*index] = 1001; // Gán mã độc giả đầu tiên là 1001
+    if (*indexDocGia == 0){
+        maDocGia[*indexDocGia] = 1001; // Gán mã độc giả đầu tiên là 1001
     }
     else
     {
-        maDocGia[*index] = maDocGia[*index - 1] + 1; // Tăng mã độc giả lên 1 so với độc giả trước đó
+        maDocGia[*indexDocGia] = maDocGia[*indexDocGia - 1] + 1; // Tăng mã độc giả lên 1 so với độc giả trước đó
     }
 
     printf("Nhap ho ten: ");
-    gets_s(hoTen[*index], MAX_STR);
+    gets_s(hoTen[*indexDocGia], MAX_STR);
 
     printf("Nhap CMND: ");
-    gets_s(cmnd[*index], MAX_STR);
+    gets_s(cmnd[*indexDocGia], MAX_STR);
 
     printf("Nhap ngay thang nam sinh: ");
-    enterDateTime(ngayThangNamSinh[*index]);
+    enterDateTime(ngayThangNamSinh[*indexDocGia]);
 
     printf("Nhap gioi tinh: ");
-    gets_s(gioiTinh[*index], MAX_STR);
+    gets_s(gioiTinh[*indexDocGia], MAX_STR);
 
     printf("Nhap email: ");
-    gets_s(email[*index], MAX_STR);
+    gets_s(email[*indexDocGia], MAX_STR);
 
     printf("Nhap dia chi: ");
-    gets_s(diaChi[*index], MAX_STR);
+    gets_s(diaChi[*indexDocGia], MAX_STR);
 
     printf("Nhap ngay mo the (dd/mm/yyyy): ");
-    enterDateTime(ngayMoThe[*index]);
+    enterDateTime(ngayMoThe[*indexDocGia]);
 
     // Tính ngày kết thúc thẻ
-    tinhNgayKetThucThe(ngayMoThe[*index], ngayKetThucThe[*index]);
-    printf("Ngay ket thuc the (tu dong tinh): %s\n", ngayKetThucThe[*index]);
+    tinhNgayKetThucThe(ngayMoThe[*indexDocGia], ngayKetThucThe[*indexDocGia]);
+    printf("Ngay ket thuc the (tu dong tinh): %s\n", ngayKetThucThe[*indexDocGia]);
 
     printf("Doc gia da duoc them thanh cong!\n");
-    hienThiDocGiaTheoIndex(*index, maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe);
-    (*index)++; // Cap nhat index
+    hienThiDocGiaTheoindexDocGia(*indexDocGia, maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe);
+    (*indexDocGia)++; // Cap nhat indexDocGia
 }
 
 
@@ -75,9 +75,9 @@ void hienThiTieuDe()
            "STT ", "MaDG ", "Ho ten", "CMND", "Ngay sinh", "GT", "Email", "Dia chi", "Ngay mo", "Ngay het");
     printf("+-----+-------+-----------------+------------+------------+------+--------------------+--------------------+------------+------------+\n");
 }
-// Hàm hiển thị thông tin độc giả theo index
-void hienThiDocGiaTheoIndex(
-    int index,
+// Hàm hiển thị thông tin độc giả theo indexDocGia
+void hienThiDocGiaTheoindexDocGia(
+    int indexDocGia,
     int maDocGia[],
     char hoTen[][MAX_STR],
     char cmnd[][MAX_STR],
@@ -91,24 +91,24 @@ void hienThiDocGiaTheoIndex(
     // In tiêu đề bảng
     hienThiTieuDe();
 
-    // In thông tin độc giả tại vị trí index (index + 1 hiển thị thứ tự)
+    // In thông tin độc giả tại vị trí indexDocGia (indexDocGia + 1 hiển thị thứ tự)
     printf("| %-4d| %-5d | %-15s | %-10s | %-10s | %-4s | %-18s | %-18s | %-10s | %-10s |\n",
-           index + 1,
-           maDocGia[index],
-           hoTen[index],
-           cmnd[index],
-           ngayThangNamSinh[index],
-           gioiTinh[index],
-           email[index],
-           diaChi[index],
-           ngayMoThe[index],
-           ngayKetThucThe[index]);
+           indexDocGia + 1,
+           maDocGia[indexDocGia],
+           hoTen[indexDocGia],
+           cmnd[indexDocGia],
+           ngayThangNamSinh[indexDocGia],
+           gioiTinh[indexDocGia],
+           email[indexDocGia],
+           diaChi[indexDocGia],
+           ngayMoThe[indexDocGia],
+           ngayKetThucThe[indexDocGia]);
     printf("+-----+-------+-----------------+------------+------------+------+--------------------+--------------------+------------+------------+\n");
 }
 
 // Hàm hiển thị thông tin tất cả các độc giả
 void hienThiTatCaDocGia(
-    int index,
+    int indexDocGia,
     int maDocGia[],
     char hoTen[][MAX_STR],
     char cmnd[][MAX_STR],
@@ -123,7 +123,7 @@ void hienThiTatCaDocGia(
     hienThiTieuDe();
 
     // Duyệt và in thông tin từng độc giả
-    for (int i = 0; i < index; i++)
+    for (int i = 0; i < indexDocGia; i++)
     {
         printf("| %-4d| %-5d | %-15s | %-10s | %-10s | %-4s | %-18s | %-18s | %-10s | %-10s |\n",
                i + 1,
@@ -150,18 +150,18 @@ void chinhSuaDocGia(
     char diaChi[][MAX_STR],
     char ngayMoThe[][MAX_STR],
     char ngayKetThucThe[][MAX_STR],
-    int index)
+    int indexDocGia)
 
 {
     int maDocGiaChinhSua;
     printf(">>>>> Nhap ma doc gia muon chinh sua: ");
     scanf_s("%d", &maDocGiaChinhSua);
 
-    for (int i = 0; i < index; i++)
+    for (int i = 0; i < indexDocGia; i++)
     {
         if (maDocGia[i] == maDocGiaChinhSua)
         {
-            hienThiDocGiaTheoIndex(i, maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe);
+            hienThiDocGiaTheoindexDocGia(i, maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe);
 
             printf("=== Chon thong tin muon thay doi===\n");
             printf("1. Ten doc gia\n");
@@ -229,7 +229,7 @@ void chinhSuaDocGia(
             }
 
             printf("Doc gia da duoc chinh sua thanh cong!\n");
-            hienThiDocGiaTheoIndex(i, maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe);
+            hienThiDocGiaTheoindexDocGia(i, maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe);
         }
     }
 }
@@ -243,17 +243,17 @@ void xoaDocGia(
     char diaChi[][MAX_STR],
     char ngayMoThe[][MAX_STR],
     char ngayKetThucThe[][MAX_STR],
-    int *index)
+    int *indexDocGia)
 {
     int maDocGiaXoa;
     printf(">>>>> Nhap ma doc gia muon xoa: ");
     scanf_s("%d", &maDocGiaXoa);
 
-    for (int i = 0; i < *index; i++)
+    for (int i = 0; i < *indexDocGia; i++)
     {
         if (maDocGia[i] == maDocGiaXoa)
         {   printf("=== Thong tin doc gia muon xoa ===\n");
-            hienThiDocGiaTheoIndex(i, maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe);
+            hienThiDocGiaTheoindexDocGia(i, maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe);
             printf("=== Ban co chac chan muon xoa doc gia nay khong? (1: Co, 0: Khong) ===\n");
             int luaChonXoa;
             printf(">>>>> Nhap lua chon: ");
@@ -269,7 +269,7 @@ void xoaDocGia(
                 return;
             }
             // Xóa thông tin độc giả bằng cách dịch chuyển các phần tử phía sau lên trước
-            for (int j = i; j < *index - 1; j++)
+            for (int j = i; j < *indexDocGia - 1; j++)
             {
                 maDocGia[j] = maDocGia[j + 1];
                 strcpy_s(hoTen[j], MAX_STR, hoTen[j + 1]);
@@ -281,16 +281,16 @@ void xoaDocGia(
                 strcpy_s(ngayMoThe[j], MAX_STR, ngayMoThe[j + 1]);
                 strcpy_s(ngayKetThucThe[j], MAX_STR, ngayKetThucThe[j + 1]);
             }
-            (*index)--; // Giảm số lượng độc giả đi 1
+            (*indexDocGia)--; // Giảm số lượng độc giả đi 1
             printf("Xoa doc gia thanh cong!\n");
             break;
         }
-        else if (i == *index - 1)
+        else if (i == *indexDocGia - 1)
         {
             printf("Khong tim thay doc gia co ma %d\n", maDocGiaXoa);
         }
     }
-    hienThiTatCaDocGia(*index, maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe);
+    hienThiTatCaDocGia(*indexDocGia, maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe);
 }
 void timKiemDocGiaTheoCMND(
     int maDocGia[],
@@ -302,20 +302,20 @@ void timKiemDocGiaTheoCMND(
     char diaChi[][MAX_STR],
     char ngayMoThe[][MAX_STR],
     char ngayKetThucThe[][MAX_STR],
-    int index)
+    int indexDocGia)
 {
     char cmndTimKiem[MAX_STR];
     printf(">>>>>Nhap CMND doc gia muon tim: ");
     gets_s(cmndTimKiem, MAX_STR);
 
-    for (int i = 0; i < index; i++)
+    for (int i = 0; i < indexDocGia; i++)
     {
         if (strcmp(cmnd[i], cmndTimKiem) == 0)
         {
-            hienThiDocGiaTheoIndex(i, maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe);
+            hienThiDocGiaTheoindexDocGia(i, maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe);
             return;
         }
-        else if (i == index - 1)
+        else if (i == indexDocGia - 1)
         {
             printf("Khong tim thay doc gia co CMND %s\n", cmndTimKiem);
         }
@@ -331,20 +331,20 @@ void timKiemDocGiaTheoHoTen(
     char diaChi[][MAX_STR],
     char ngayMoThe[][MAX_STR],
     char ngayKetThucThe[][MAX_STR],
-    int index)
+    int indexDocGia)
 {
     char hoTenTimKiem[MAX_STR];
     printf(">>>>>Nhap ho ten doc gia muon tim: ");
     gets_s(hoTenTimKiem, MAX_STR);
 
-    for (int i = 0; i < index; i++)
+    for (int i = 0; i < indexDocGia; i++)
     {
         if (strcmp(hoTen[i], hoTenTimKiem) == 0)
         {
-            hienThiDocGiaTheoIndex(i, maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe);
+            hienThiDocGiaTheoindexDocGia(i, maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe);
             return;
         }
-        else if (i == index - 1)
+        else if (i == indexDocGia - 1)
         {
             printf("Khong tim thay doc gia co ho ten: %s\n", hoTenTimKiem);
         }

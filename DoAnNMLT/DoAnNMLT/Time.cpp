@@ -1,7 +1,7 @@
 ﻿
 #include <stdio.h>
 #include <string.h>
-#include "Header.h"
+#include "HeaderDocGia.h"
 
  void enterDateTime(char timeStr[MAX_STR]) {
     int ngay, thang, nam;
