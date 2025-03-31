@@ -321,3 +321,32 @@ void timKiemDocGiaTheoCMND(
         }
     }
 }
+void timKiemDocGiaTheoHoTen(
+    int maDocGia[],
+    char hoTen[][MAX_STR],
+    char cmnd[][MAX_STR],
+    char ngayThangNamSinh[][MAX_STR],
+    char gioiTinh[][MAX_STR],
+    char email[][MAX_STR],
+    char diaChi[][MAX_STR],
+    char ngayMoThe[][MAX_STR],
+    char ngayKetThucThe[][MAX_STR],
+    int index)
+{
+    char hoTenTimKiem[MAX_STR];
+    printf(">>>>>Nhap ho ten doc gia muon tim: ");
+    gets_s(hoTenTimKiem, MAX_STR);
+
+    for (int i = 0; i < index; i++)
+    {
+        if (strcmp(hoTen[i], hoTenTimKiem) == 0)
+        {
+            hienThiDocGiaTheoIndex(i, maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe);
+            return;
+        }
+        else if (i == index - 1)
+        {
+            printf("Khong tim thay doc gia co ho ten: %s\n", hoTenTimKiem);
+        }
+    }
+}

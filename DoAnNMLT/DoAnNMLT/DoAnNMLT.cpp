@@ -84,10 +84,10 @@ void showMenu()
 				printf("Tim kiem doc gia theo CMND.\n");
 				timKiemDocGiaTheoCMND(maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe, index);
 				break;
-				// case 'f':
-				// 	printf( "Tim kiem docgia theo ho ten." );
-				// 	findReaderByName(maDocGia, hoTen, cmnd, email, &index);
-				// 	break;*/
+			case 'f':
+				printf( "Tim kiem doc gia theo ho ten.\n" );
+				timKiemDocGiaTheoHoTen(maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe, index);
+				break;
 			case 'g':
 				isBreak = true;
 				break;
