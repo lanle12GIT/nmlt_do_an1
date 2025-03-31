@@ -48,8 +48,9 @@ void showMenu()
 	{
 		while (1)
 		{
-			printf("Ban chon Quan li doc gia.\n");
-			printf("Nhap lua chon (a-g): \n");
+			printf("\n---------------------------------\n");
+			printf("------Quan li doc gia.-----\n");
+			printf(">>>>>Nhap lua chon (a-g): \n");
 			printf("   a. Xem danh sach doc gia trong thu vien\n");
 			printf("   b. Them doc gia\n");
 			printf("   c. Chinh sua thong tin mot doc gia\n");
@@ -80,7 +81,7 @@ void showMenu()
 				xoaDocGia(maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe, &index);
 				break;
 			case 'e':
-				printf("Tim kiem doc gia theo CMND.");
+				printf("Tim kiem doc gia theo CMND.\n");
 				timKiemDocGiaTheoCMND(maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe, index);
 				break;
 				// case 'f':
@@ -103,8 +104,9 @@ void showMenu()
 	}
 	case '2':
 	{
-		printf("Ban chon Quan li sach.\n");
-		printf("Nhap lua chon (a-f): \n");
+		printf("\n---------------------------------\n");
+		printf("------Quan li sach.-----\n");
+		printf(">>>>>Nhap lua chon (a-f): \n");
 		printf("   a. Xem danh sach cac sach trong thu vien\n");
 		printf("   b. Them sach\n");
 		printf("   c. Chinh sua thong tin mot quyen sach\n");

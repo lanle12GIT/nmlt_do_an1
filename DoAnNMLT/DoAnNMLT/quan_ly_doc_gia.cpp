@@ -292,4 +292,32 @@ void xoaDocGia(
     }
     hienThiTatCaDocGia(*index, maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe);
 }
+void timKiemDocGiaTheoCMND(
+    int maDocGia[],
+    char hoTen[][MAX_STR],
+    char cmnd[][MAX_STR],
+    char ngayThangNamSinh[][MAX_STR],
+    char gioiTinh[][MAX_STR],
+    char email[][MAX_STR],
+    char diaChi[][MAX_STR],
+    char ngayMoThe[][MAX_STR],
+    char ngayKetThucThe[][MAX_STR],
+    int index)
+{
+    char cmndTimKiem[MAX_STR];
+    printf(">>>>>Nhap CMND doc gia muon tim: ");
+    gets_s(cmndTimKiem, MAX_STR);
 
+    for (int i = 0; i < index; i++)
+    {
+        if (strcmp(cmnd[i], cmndTimKiem) == 0)
+        {
+            hienThiDocGiaTheoIndex(i, maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe);
+            return;
+        }
+        else if (i == index - 1)
+        {
+            printf("Khong tim thay doc gia co CMND %s\n", cmndTimKiem);
+        }
+    }
+}
