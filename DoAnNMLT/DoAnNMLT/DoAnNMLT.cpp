@@ -137,12 +137,12 @@ void showMenu()
 			switch (choice[0])
 			{
 			case 'a':
-				printf("Xem danh sach cac sach trong thu vien.");
-				hienThiTatCaSach( ISBN, tenSach, tacGia,nhaXuatBan,namXuatBan,theLoai,giaSach,soLuongSach,indexSach );
+				printf("Xem danh sach cac sach trong thu vien.\n");
+				hienThiTatCaSach(ISBN, tenSach, tacGia, nhaXuatBan, namXuatBan, theLoai, giaSach, soLuongSach, indexSach);
 				break;
 			case 'b':
 				printf("Them sach.");
-
+				themSach(ISBN, tenSach, tacGia, nhaXuatBan, namXuatBan, theLoai, giaSach, soLuongSach, &indexSach);
 				break;
 			case 'c':
 				printf("Chinh sua thong tin mot quyen sach.");
@@ -307,50 +307,50 @@ int main()
 	strcpy_s(ngayKetThucThe[4], "05-05-2028");
 
 	indexSach = 5;
-    ISBN[0] = 1111;
-    strcpy_s(tenSach[0], "Lap Trinh C++");
-    strcpy_s(tacGia[0], "Nguyen Van A");
-    strcpy_s(nhaXuatBan[0], "NXB Tre");
-    namXuatBan[0] = 2020;
-    strcpy_s(theLoai[0], "Lap Trinh");
-    giaSach[0] = 150000.0;
-    soLuongSach[0] = 10;
+	ISBN[0] = 1111;
+	strcpy_s(tenSach[0], "Lap Trinh C++");
+	strcpy_s(tacGia[0], "Nguyen Van A");
+	strcpy_s(nhaXuatBan[0], "NXB Tre");
+	namXuatBan[0] = 2020;
+	strcpy_s(theLoai[0], "Lap Trinh");
+	giaSach[0] = 150000.0;
+	soLuongSach[0] = 10;
 
-    ISBN[1] = 2222;
-    strcpy_s(tenSach[1], "Lap Trinh Java");
-    strcpy_s(tacGia[1], "Tran Thi B");
-    strcpy_s(nhaXuatBan[1], "NXB Giao Duc");
-    namXuatBan[1] = 2021;
-    strcpy_s(theLoai[1], "Lap Trinh");
-    giaSach[1] = 200000.0;
-    soLuongSach[1] = 15;
+	ISBN[1] = 2222;
+	strcpy_s(tenSach[1], "Lap Trinh Java");
+	strcpy_s(tacGia[1], "Tran Thi B");
+	strcpy_s(nhaXuatBan[1], "NXB Giao Duc");
+	namXuatBan[1] = 2021;
+	strcpy_s(theLoai[1], "Lap Trinh");
+	giaSach[1] = 200000.0;
+	soLuongSach[1] = 15;
 
-    ISBN[2] = 3333;
-    strcpy_s(tenSach[2], "Lap Trinh Python");
-    strcpy_s(tacGia[2], "Le Van C");
-    strcpy_s(nhaXuatBan[2], "NXB Kim Dong");
-    namXuatBan[2] = 2019;
-    strcpy_s(theLoai[2], "Lap Trinh");
-    giaSach[2] = 180000.0;
-    soLuongSach[2] = 8;
+	ISBN[2] = 3333;
+	strcpy_s(tenSach[2], "Lap Trinh Python");
+	strcpy_s(tacGia[2], "Le Van C");
+	strcpy_s(nhaXuatBan[2], "NXB Kim Dong");
+	namXuatBan[2] = 2019;
+	strcpy_s(theLoai[2], "Lap Trinh");
+	giaSach[2] = 180000.0;
+	soLuongSach[2] = 8;
 
-    ISBN[3] = 4444;
-    strcpy_s(tenSach[3], "Thuat Toan");
-    strcpy_s(tacGia[3], "Pham Thi D");
-    strcpy_s(nhaXuatBan[3], "NXB Tre");
-    namXuatBan[3] = 2018;
-    strcpy_s(theLoai[3], "Khoa Hoc");
-    giaSach[3] = 250000.0;
-    soLuongSach[3] = 5;
+	ISBN[3] = 4444;
+	strcpy_s(tenSach[3], "Thuat Toan");
+	strcpy_s(tacGia[3], "Pham Thi D");
+	strcpy_s(nhaXuatBan[3], "NXB Tre");
+	namXuatBan[3] = 2018;
+	strcpy_s(theLoai[3], "Khoa Hoc");
+	giaSach[3] = 250000.0;
+	soLuongSach[3] = 5;
 
-    ISBN[4] = 5555;
-    strcpy_s(tenSach[4], "Co So Du Lieu");
-    strcpy_s(tacGia[4], "Hoang Van E");
-    strcpy_s(nhaXuatBan[4], "NXB Giao Duc");
-    namXuatBan[4] = 2022;
-    strcpy_s(theLoai[4], "Cong Nghe");
-    giaSach[4] = 300000.0;
-    soLuongSach[4] = 12;
+	ISBN[4] = 5555;
+	strcpy_s(tenSach[4], "Co So Du Lieu");
+	strcpy_s(tacGia[4], "Hoang Van E");
+	strcpy_s(nhaXuatBan[4], "NXB Giao Duc");
+	namXuatBan[4] = 2022;
+	strcpy_s(theLoai[4], "Cong Nghe");
+	giaSach[4] = 300000.0;
+	soLuongSach[4] = 12;
 
 	showMenu();
 
