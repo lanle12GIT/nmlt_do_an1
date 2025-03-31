@@ -22,7 +22,7 @@ void hienThiDocGiaTheoIndex(
     char ngayMoThe[][MAX_STR],
     char ngayKetThucThe[][MAX_STR]);
 void hienThiTatCaDocGia(
-    int soLuongDocGia,
+    int index,
     int maDocGia[],
     char hoTen[][MAX_STR],
     char cmnd[][MAX_STR],
@@ -42,4 +42,26 @@ void chinhSuaDocGia(
     char diaChi[][MAX_STR],
     char ngayMoThe[][MAX_STR],
     char ngayKetThucThe[][MAX_STR],
-    int soLuongDocGia);
+    int index);
+void xoaDocGia(
+    int maDocGia[],
+    char hoTen[][MAX_STR],
+    char cmnd[][MAX_STR],
+    char ngayThangNamSinh[][MAX_STR],
+    char gioiTinh[][MAX_STR],
+    char email[][MAX_STR],
+    char diaChi[][MAX_STR],
+    char ngayMoThe[][MAX_STR],
+    char ngayKetThucThe[][MAX_STR],
+    int *index);
+void timKiemDocGiaTheoCMND(
+    int maDocGia[],
+    char hoTen[][MAX_STR],
+    char cmnd[][MAX_STR],
+    char ngayThangNamSinh[][MAX_STR],
+    char gioiTinh[][MAX_STR],
+    char email[][MAX_STR],
+    char diaChi[][MAX_STR],
+    char ngayMoThe[][MAX_STR],
+    char ngayKetThucThe[][MAX_STR],
+    int index);

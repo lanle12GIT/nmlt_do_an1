@@ -72,17 +72,17 @@ void showMenu()
 				themDocGia(maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe, &index);
 				break;
 			case 'c':
-					printf( "Chinh sua thong tin mot doc gia.\n" );
-					chinhSuaDocGia(maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe, index);
-					break;
-				// case 'd':
-				// 	printf( "Xoa thong tin mot doc gia." );
-				// 	deleteReader(maDocGia, hoTen, cmnd, email, &index);
-				// 	break;
-				// case 'e':
-				// 	printf( "Tim kiem doc gia theo CMND." );
-				// 	findReaderBycmnd(maDocGia, hoTen, cmnd, email, &index);
-				// 	break;
+				printf("Chinh sua thong tin mot doc gia.\n");
+				chinhSuaDocGia(maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe, index);
+				break;
+			case 'd':
+				printf("Xoa thong tin mot doc gia.\n");
+				xoaDocGia(maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe, &index);
+				break;
+			case 'e':
+				printf("Tim kiem doc gia theo CMND.");
+				timKiemDocGiaTheoCMND(maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe, index);
+				break;
 				// case 'f':
 				// 	printf( "Tim kiem docgia theo ho ten." );
 				// 	findReaderByName(maDocGia, hoTen, cmnd, email, &index);
@@ -98,7 +98,6 @@ void showMenu()
 			{
 				break;
 			}
-			
 		}
 		break;
 	}
@@ -232,55 +231,55 @@ int main()
 {
 	hienThiPoster();
 	index = 5;
-    maDocGia[0] = 1001;
-    strcpy_s(hoTen[0], "Nguyen Van A");
-    strcpy_s(cmnd[0], "123456789");
-    strcpy_s(ngayThangNamSinh[0], "01-01-1990");
-    strcpy_s(gioiTinh[0], "Nam");
-    strcpy_s(email[0], "nguyenvana@gmail.com");
-    strcpy_s(diaChi[0], "Ha Noi");
-    strcpy_s(ngayMoThe[0], "01-01-2020");
-    strcpy_s(ngayKetThucThe[0], "01-01-2024");
+	maDocGia[0] = 1001;
+	strcpy_s(hoTen[0], "Nguyen Van A");
+	strcpy_s(cmnd[0], "123456789");
+	strcpy_s(ngayThangNamSinh[0], "01-01-1990");
+	strcpy_s(gioiTinh[0], "Nam");
+	strcpy_s(email[0], "nguyenvana@gmail.com");
+	strcpy_s(diaChi[0], "Ha Noi");
+	strcpy_s(ngayMoThe[0], "01-01-2020");
+	strcpy_s(ngayKetThucThe[0], "01-01-2024");
 
-    maDocGia[1] = 1002;
-    strcpy_s(hoTen[1], "Tran Thi B");
-    strcpy_s(cmnd[1], "987654321");
-    strcpy_s(ngayThangNamSinh[1], "02-02-1992");
-    strcpy_s(gioiTinh[1], "Nu");
-    strcpy_s(email[1], "tranthib@gmail.com");
-    strcpy_s(diaChi[1], "Hai Phong");
-    strcpy_s(ngayMoThe[1], "02-02-2021");
-    strcpy_s(ngayKetThucThe[1], "02-02-2025");
+	maDocGia[1] = 1002;
+	strcpy_s(hoTen[1], "Tran Thi B");
+	strcpy_s(cmnd[1], "987654321");
+	strcpy_s(ngayThangNamSinh[1], "02-02-1992");
+	strcpy_s(gioiTinh[1], "Nu");
+	strcpy_s(email[1], "tranthib@gmail.com");
+	strcpy_s(diaChi[1], "Hai Phong");
+	strcpy_s(ngayMoThe[1], "02-02-2021");
+	strcpy_s(ngayKetThucThe[1], "02-02-2025");
 
-    maDocGia[2] = 1003;
-    strcpy_s(hoTen[2], "Le Van C");
-    strcpy_s(cmnd[2], "456789123");
-    strcpy_s(ngayThangNamSinh[2], "03-03-1993");
-    strcpy_s(gioiTinh[2], "Nam");
-    strcpy_s(email[2], "levanc@gmail.com");
-    strcpy_s(diaChi[2], "Da Nang");
-    strcpy_s(ngayMoThe[2], "03-03-2022");
-    strcpy_s(ngayKetThucThe[2], "03-03-2026");
+	maDocGia[2] = 1003;
+	strcpy_s(hoTen[2], "Le Van C");
+	strcpy_s(cmnd[2], "456789123");
+	strcpy_s(ngayThangNamSinh[2], "03-03-1993");
+	strcpy_s(gioiTinh[2], "Nam");
+	strcpy_s(email[2], "levanc@gmail.com");
+	strcpy_s(diaChi[2], "Da Nang");
+	strcpy_s(ngayMoThe[2], "03-03-2022");
+	strcpy_s(ngayKetThucThe[2], "03-03-2026");
 
-    maDocGia[3] = 1004;
-    strcpy_s(hoTen[3], "Pham Thi D");
-    strcpy_s(cmnd[3], "321654987");
-    strcpy_s(ngayThangNamSinh[3], "04-04-1994");
-    strcpy_s(gioiTinh[3], "Nu");
-    strcpy_s(email[3], "phamthid@gmail.com");
-    strcpy_s(diaChi[3], "Ho Chi Minh");
-    strcpy_s(ngayMoThe[3], "04-04-2023");
-    strcpy_s(ngayKetThucThe[3], "04-04-2027");
+	maDocGia[3] = 1004;
+	strcpy_s(hoTen[3], "Pham Thi D");
+	strcpy_s(cmnd[3], "321654987");
+	strcpy_s(ngayThangNamSinh[3], "04-04-1994");
+	strcpy_s(gioiTinh[3], "Nu");
+	strcpy_s(email[3], "phamthid@gmail.com");
+	strcpy_s(diaChi[3], "Ho Chi Minh");
+	strcpy_s(ngayMoThe[3], "04-04-2023");
+	strcpy_s(ngayKetThucThe[3], "04-04-2027");
 
-    maDocGia[4] = 1005;
-    strcpy_s(hoTen[4], "Hoang Van E");
-    strcpy_s(cmnd[4], "789123456");
-    strcpy_s(ngayThangNamSinh[4], "05-05-1995");
-    strcpy_s(gioiTinh[4], "Nam");
-    strcpy_s(email[4], "hoangvane@gmail.com");
-    strcpy_s(diaChi[4], "Can Tho");
-    strcpy_s(ngayMoThe[4], "05-05-2024");
-    strcpy_s(ngayKetThucThe[4], "05-05-2028");
+	maDocGia[4] = 1005;
+	strcpy_s(hoTen[4], "Hoang Van E");
+	strcpy_s(cmnd[4], "789123456");
+	strcpy_s(ngayThangNamSinh[4], "05-05-1995");
+	strcpy_s(gioiTinh[4], "Nam");
+	strcpy_s(email[4], "hoangvane@gmail.com");
+	strcpy_s(diaChi[4], "Can Tho");
+	strcpy_s(ngayMoThe[4], "05-05-2024");
+	strcpy_s(ngayKetThucThe[4], "05-05-2028");
 
 	showMenu();
 

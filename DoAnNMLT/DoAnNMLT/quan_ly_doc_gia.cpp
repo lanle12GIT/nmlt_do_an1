@@ -28,11 +28,13 @@ void themDocGia(
         printf("Khong the them doc gia moi. So luong doc gia da dat toi da.\n");
         return;
     }
-
-    printf("Nhap ma doc gia: ");
-    scanf_s("%d", &maDocGia[*index]);
-    while (getchar() != '\n')
-        ;
+    if (*index == 0){
+        maDocGia[*index] = 1001; // Gán mã độc giả đầu tiên là 1001
+    }
+    else
+    {
+        maDocGia[*index] = maDocGia[*index - 1] + 1; // Tăng mã độc giả lên 1 so với độc giả trước đó
+    }
 
     printf("Nhap ho ten: ");
     gets_s(hoTen[*index], MAX_STR);
@@ -63,6 +65,7 @@ void themDocGia(
     hienThiDocGiaTheoIndex(*index, maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe);
     (*index)++; // Cap nhat index
 }
+
 
 // Hàm in tiêu đề bảng
 void hienThiTieuDe()
@@ -105,7 +108,7 @@ void hienThiDocGiaTheoIndex(
 
 // Hàm hiển thị thông tin tất cả các độc giả
 void hienThiTatCaDocGia(
-    int soLuongDocGia,
+    int index,
     int maDocGia[],
     char hoTen[][MAX_STR],
     char cmnd[][MAX_STR],
@@ -120,7 +123,7 @@ void hienThiTatCaDocGia(
     hienThiTieuDe();
 
     // Duyệt và in thông tin từng độc giả
-    for (int i = 0; i < soLuongDocGia; i++)
+    for (int i = 0; i < index; i++)
     {
         printf("| %-4d| %-5d | %-15s | %-10s | %-10s | %-4s | %-18s | %-18s | %-10s | %-10s |\n",
                i + 1,
@@ -147,14 +150,14 @@ void chinhSuaDocGia(
     char diaChi[][MAX_STR],
     char ngayMoThe[][MAX_STR],
     char ngayKetThucThe[][MAX_STR],
-    int soLuongDocGia)
+    int index)
 
 {
     int maDocGiaChinhSua;
     printf(">>>>> Nhap ma doc gia muon chinh sua: ");
     scanf_s("%d", &maDocGiaChinhSua);
 
-    for (int i = 0; i < soLuongDocGia; i++)
+    for (int i = 0; i < index; i++)
     {
         if (maDocGia[i] == maDocGiaChinhSua)
         {
@@ -230,3 +233,63 @@ void chinhSuaDocGia(
         }
     }
 }
+void xoaDocGia(
+    int maDocGia[],
+    char hoTen[][MAX_STR],
+    char cmnd[][MAX_STR],
+    char ngayThangNamSinh[][MAX_STR],
+    char gioiTinh[][MAX_STR],
+    char email[][MAX_STR],
+    char diaChi[][MAX_STR],
+    char ngayMoThe[][MAX_STR],
+    char ngayKetThucThe[][MAX_STR],
+    int *index)
+{
+    int maDocGiaXoa;
+    printf(">>>>> Nhap ma doc gia muon xoa: ");
+    scanf_s("%d", &maDocGiaXoa);
+
+    for (int i = 0; i < *index; i++)
+    {
+        if (maDocGia[i] == maDocGiaXoa)
+        {   printf("=== Thong tin doc gia muon xoa ===\n");
+            hienThiDocGiaTheoIndex(i, maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe);
+            printf("=== Ban co chac chan muon xoa doc gia nay khong? (1: Co, 0: Khong) ===\n");
+            int luaChonXoa;
+            printf(">>>>> Nhap lua chon: ");
+            scanf_s("%d", &luaChonXoa);
+            if (luaChonXoa == 0)
+            {
+                printf("Khong xoa doc gia.\n");
+                return;
+            }
+            else if (luaChonXoa != 1)
+            {
+                printf("Lua chon khong hop le. Khong xoa doc gia.\n");
+                return;
+            }
+            // Xóa thông tin độc giả bằng cách dịch chuyển các phần tử phía sau lên trước
+            for (int j = i; j < *index - 1; j++)
+            {
+                maDocGia[j] = maDocGia[j + 1];
+                strcpy_s(hoTen[j], MAX_STR, hoTen[j + 1]);
+                strcpy_s(cmnd[j], MAX_STR, cmnd[j + 1]);
+                strcpy_s(ngayThangNamSinh[j], MAX_STR, ngayThangNamSinh[j + 1]);
+                strcpy_s(gioiTinh[j], MAX_STR, gioiTinh[j + 1]);
+                strcpy_s(email[j], MAX_STR, email[j + 1]);
+                strcpy_s(diaChi[j], MAX_STR, diaChi[j + 1]);
+                strcpy_s(ngayMoThe[j], MAX_STR, ngayMoThe[j + 1]);
+                strcpy_s(ngayKetThucThe[j], MAX_STR, ngayKetThucThe[j + 1]);
+            }
+            (*index)--; // Giảm số lượng độc giả đi 1
+            printf("Xoa doc gia thanh cong!\n");
+            break;
+        }
+        else if (i == *index - 1)
+        {
+            printf("Khong tim thay doc gia co ma %d\n", maDocGiaXoa);
+        }
+    }
+    hienThiTatCaDocGia(*index, maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe);
+}
+
