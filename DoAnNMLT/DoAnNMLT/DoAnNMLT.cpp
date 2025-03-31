@@ -2,7 +2,6 @@
 #include <string.h>
 #include "Header.h"
 
-
 int index = 0;
 // Các mảng lưu trữ thông tin độc giả
 int maDocGia[MAX_DOC_GIA];
@@ -14,7 +13,8 @@ char email[MAX_DOC_GIA][MAX_STR];
 char diaChi[MAX_DOC_GIA][MAX_STR];
 char ngayMoThe[MAX_DOC_GIA][MAX_STR];
 char ngayKetThucThe[MAX_DOC_GIA][MAX_STR];
-void hienThiPoster() {
+void hienThiPoster()
+{
 	printf("*****************************************************\n");
 	printf("*                                                   *\n");
 	printf("*           HE THONG QUAN LI THU VIEN               *\n");
@@ -28,8 +28,9 @@ void hienThiPoster() {
 	printf("\n\n");
 }
 
-//Hàm hiển thị menu
-void showMenu() {
+// Hàm hiển thị menu
+void showMenu()
+{
 
 	printf("=== Menu Quan Li Thu Vien ===\n");
 	printf("1. Quan li doc gia\n");
@@ -39,56 +40,70 @@ void showMenu() {
 	printf("5. Cac thong ke co ban\n");
 	printf("Nhap lua chon cua ban: ");
 	char choice[2]; // Kích thước 10 ký tự (9 ký tự + 1 null terminator)
-    gets_s(choice, 2);
+	gets_s(choice, 2);
 
-	switch (choice[0]) {
-	case '1': {
-		printf("Ban chon Quan li doc gia.\n");
-		printf("Nhap lua chon (a-f): \n");
-		printf("   a. Xem danh sach doc gia trong thu vien\n");
-		printf("   b. Them doc gia\n");
-		printf("   c. Chinh sua thong tin mot doc gia\n");
-		printf("   d. Xoa thong tin mot doc gia\n");
-		printf("   e. Tim kiem doc gia theo CMND\n");
-		printf("   f. Tim kiem sach theo ho ten\n");
-		char subChoice[2];
-		gets_s( subChoice, 2);
-		
-		switch (subChoice[0]) {
-		/*case 'a':
-			printf( "Xem danh sach doc gia trong thu vien.\n" );
-			hienThiDanhSachDocGia(maDocGia, hoTen, cmnd, email, index);
-			break;*/
-				case 'b':
-			printf("Them doc gia.\n");
-			themDocGia(maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe, &index);
-			break;
-		/*case 'c':
-			printf( "Chinh sua thong tin mot doc gia." );
-			updateReader(maDocGia, hoTen, cmnd, email, &index);
-			break;
-		case 'd':
-			printf( "Xoa thong tin mot doc gia." );
-			deleteReader(maDocGia, hoTen, cmnd, email, &index);
-			break;
-		case 'e':
-			printf( "Tim kiem doc gia theo CMND." );
-			findReaderBycmnd(maDocGia, hoTen, cmnd, email, &index);
-			break;
-		case 'f':
-			printf( "Tim kiem docgia theo ho ten." );
-			findReaderByName(maDocGia, hoTen, cmnd, email, &index);
-			break;*/
-		default:
-			printf( "Lua chon khong hop le!" );
-			break;
+	switch (choice[0])
+	{
+	case '1':
+	{
+		while (1)
+		{
+			printf("Ban chon Quan li doc gia.\n");
+			printf("Nhap lua chon (a-g): \n");
+			printf("   a. Xem danh sach doc gia trong thu vien\n");
+			printf("   b. Them doc gia\n");
+			printf("   c. Chinh sua thong tin mot doc gia\n");
+			printf("   d. Xoa thong tin mot doc gia\n");
+			printf("   e. Tim kiem doc gia theo CMND\n");
+			printf("   f. Tim kiem sach theo ho ten\n");
+			printf("   g. Thoat\n");
+
+			char subChoice[2];
+			gets_s(subChoice, 2);
+			bool isBreak = false;
+			switch (subChoice[0])
+			{
+			case 'a':
+				printf("Xem danh sach doc gia trong thu vien.\n");
+				hienThiTatCaDocGia(index, maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe);
+				break;
+			case 'b':
+				printf("Them doc gia.\n");
+				themDocGia(maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe, &index);
+				break;
+			case 'c':
+					printf( "Chinh sua thong tin mot doc gia.\n" );
+					chinhSuaDocGia(maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe, index);
+					break;
+				// case 'd':
+				// 	printf( "Xoa thong tin mot doc gia." );
+				// 	deleteReader(maDocGia, hoTen, cmnd, email, &index);
+				// 	break;
+				// case 'e':
+				// 	printf( "Tim kiem doc gia theo CMND." );
+				// 	findReaderBycmnd(maDocGia, hoTen, cmnd, email, &index);
+				// 	break;
+				// case 'f':
+				// 	printf( "Tim kiem docgia theo ho ten." );
+				// 	findReaderByName(maDocGia, hoTen, cmnd, email, &index);
+				// 	break;*/
+			case 'g':
+				isBreak = true;
+				break;
+			default:
+				printf("Lua chon khong hop le!");
+				break;
+			}
+			if (isBreak)
+			{
+				break;
+			}
+			
 		}
 		break;
-
-	
-		break;
 	}
-	case '2': {
+	case '2':
+	{
 		printf("Ban chon Quan li sach.\n");
 		printf("Nhap lua chon (a-f): \n");
 		printf("   a. Xem danh sach cac sach trong thu vien\n");
@@ -131,7 +146,8 @@ void showMenu() {
 		break;*/
 		break;
 	}
-	case '3': {
+	case '3':
+	{
 		printf("Lap phieu muon sach.");
 
 		/*{
@@ -151,14 +167,16 @@ void showMenu() {
 		break;*/
 		break;
 	}
-	case '4': {
+	case '4':
+	{
 		printf("Lap phieu tra sach.");
 		//		int maDocGia;long ISBN[] = { 1,2,4 };
 		//		TraSach(phieumuon, numberOfPhieumuon, maDocGia, ISBN, numOfIsbn, arrBooks, m);
 		//		break;
 		break;
 	}
-	case '5': {
+	case '5':
+	{
 		//		printf( "Ban chon Cac thong ke co ban." );
 		//		printf( "Nhap lua chon (a-f): ";
 		//		printf( "   a. Thong ke so luong sach trong thu vien" );
@@ -201,22 +219,69 @@ void showMenu() {
 		//		break;
 		break;
 	}
-	default: {
+	default:
+	{
 		printf("Lua chon khong hop le! Vui long thu lai.");
 		break;
 	}
-		   //}*/
-
-
-
-
+		//}*/
 	}
-
 }
 
 int main()
 {
 	hienThiPoster();
+	index = 5;
+    maDocGia[0] = 1001;
+    strcpy_s(hoTen[0], "Nguyen Van A");
+    strcpy_s(cmnd[0], "123456789");
+    strcpy_s(ngayThangNamSinh[0], "01-01-1990");
+    strcpy_s(gioiTinh[0], "Nam");
+    strcpy_s(email[0], "nguyenvana@gmail.com");
+    strcpy_s(diaChi[0], "Ha Noi");
+    strcpy_s(ngayMoThe[0], "01-01-2020");
+    strcpy_s(ngayKetThucThe[0], "01-01-2024");
+
+    maDocGia[1] = 1002;
+    strcpy_s(hoTen[1], "Tran Thi B");
+    strcpy_s(cmnd[1], "987654321");
+    strcpy_s(ngayThangNamSinh[1], "02-02-1992");
+    strcpy_s(gioiTinh[1], "Nu");
+    strcpy_s(email[1], "tranthib@gmail.com");
+    strcpy_s(diaChi[1], "Hai Phong");
+    strcpy_s(ngayMoThe[1], "02-02-2021");
+    strcpy_s(ngayKetThucThe[1], "02-02-2025");
+
+    maDocGia[2] = 1003;
+    strcpy_s(hoTen[2], "Le Van C");
+    strcpy_s(cmnd[2], "456789123");
+    strcpy_s(ngayThangNamSinh[2], "03-03-1993");
+    strcpy_s(gioiTinh[2], "Nam");
+    strcpy_s(email[2], "levanc@gmail.com");
+    strcpy_s(diaChi[2], "Da Nang");
+    strcpy_s(ngayMoThe[2], "03-03-2022");
+    strcpy_s(ngayKetThucThe[2], "03-03-2026");
+
+    maDocGia[3] = 1004;
+    strcpy_s(hoTen[3], "Pham Thi D");
+    strcpy_s(cmnd[3], "321654987");
+    strcpy_s(ngayThangNamSinh[3], "04-04-1994");
+    strcpy_s(gioiTinh[3], "Nu");
+    strcpy_s(email[3], "phamthid@gmail.com");
+    strcpy_s(diaChi[3], "Ho Chi Minh");
+    strcpy_s(ngayMoThe[3], "04-04-2023");
+    strcpy_s(ngayKetThucThe[3], "04-04-2027");
+
+    maDocGia[4] = 1005;
+    strcpy_s(hoTen[4], "Hoang Van E");
+    strcpy_s(cmnd[4], "789123456");
+    strcpy_s(ngayThangNamSinh[4], "05-05-1995");
+    strcpy_s(gioiTinh[4], "Nam");
+    strcpy_s(email[4], "hoangvane@gmail.com");
+    strcpy_s(diaChi[4], "Can Tho");
+    strcpy_s(ngayMoThe[4], "05-05-2024");
+    strcpy_s(ngayKetThucThe[4], "05-05-2028");
+
 	showMenu();
 
 	return 0;
