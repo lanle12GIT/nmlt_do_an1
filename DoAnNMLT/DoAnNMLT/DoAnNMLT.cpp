@@ -44,14 +44,16 @@ void hienThiPoster()
 // Hàm hiển thị menu
 void showMenu()
 {
-
+	bool isFinshed = false;
+	do{
 	printf("=== Menu Quan Li Thu Vien ===\n");
 	printf("1. Quan li doc gia\n");
 	printf("2. Quan li sach\n");
 	printf("3. Lap phieu muon sach\n");
 	printf("4. Lap phieu tra sach\n");
 	printf("5. Cac thong ke co ban\n");
-	printf("Nhap lua chon cua ban: ");
+	printf("6. Thoat\n");
+	printf(">>>>>Nhap lua chon cua ban: ");
 	char choice[2]; // Kích thước 10 ký tự (9 ký tự + 1 null terminator)
 	gets_s(choice, 2);
 
@@ -59,7 +61,8 @@ void showMenu()
 	{
 	case '1':
 	{
-		while (1)
+		bool isBreak = false;
+		do
 		{
 			printf("\n---------------------------------\n");
 			printf("------Quan li doc gia.-----\n");
@@ -71,10 +74,10 @@ void showMenu()
 			printf("   e. Tim kiem doc gia theo CMND\n");
 			printf("   f. Tim kiem sach theo ho ten\n");
 			printf("   g. Thoat\n");
-
+			printf(">>>>>Nhap lua chon cua ban: ");
 			char subChoice[2];
 			gets_s(subChoice, 2);
-			bool isBreak = false;
+
 			switch (subChoice[0])
 			{
 			case 'a':
@@ -108,18 +111,14 @@ void showMenu()
 				printf("Lua chon khong hop le!");
 				break;
 			}
-			if (isBreak)
-			{
-				break;
-			}
-		}
+		} while (!isBreak);
 		break;
 	}
 	case '2':
 	{
-		while (1)
+		bool isBreak = false;
+		do
 		{
-			/* code */
 
 			printf("\n---------------------------------\n");
 			printf("------Quan li sach.-----\n");
@@ -131,9 +130,9 @@ void showMenu()
 			printf("   e. Tim kiem sach theo ISBN\n");
 			printf("   f. Tim kiem sach theo ten sach\n");
 			printf("   g. Thoat\n");
+			printf(">>>>>Nhap lua chon cua ban: ");
 			char choice[2]; // Kích thước 2 ký tự (1 ký tự + 1 null terminator)
 			gets_s(choice, 2);
-			bool isBreak = false;
 			switch (choice[0])
 			{
 			case 'a':
@@ -145,29 +144,29 @@ void showMenu()
 				themSach(ISBN, tenSach, tacGia, nhaXuatBan, namXuatBan, theLoai, giaSach, soLuongSach, &indexSach);
 				break;
 			case 'c':
-				printf("Chinh sua thong tin mot quyen sach.");
-
+				printf("Chinh sua thong tin mot quyen sach.\n");
+				chinhSuaSach(ISBN, tenSach, tacGia, nhaXuatBan, namXuatBan, theLoai, giaSach, soLuongSach, indexSach);
 				break;
 			case 'd':
-				printf("Xoa thong tin sach.");
+				printf("Xoa thong tin sach.\n");
 
 				break;
 			case 'e':
-				printf("Tim kiem sach theo ISBN.");
+				printf("Tim kiem sach theo ISBN.\n");
 
 				break;
 			case 'f':
-				printf("Tim kiem sach theo ten sach.");
+				printf("Tim kiem sach theo ten sach.\n");
 
 				break;
 			case 'g':
 				isBreak = true;
 				break;
 			default:
-				printf("Lua chon khong hop le!");
+				printf("Lua chon khong hop le!\n");
 				break;
 			}
-		}
+		} while (!isBreak);
 		break;
 	}
 	case '3':
@@ -243,13 +242,27 @@ void showMenu()
 		//		break;
 		break;
 	}
+	case '6':
+	{	printf("\n====================================\n");
+		printf("Thoat khoi chuong trinh.\n");
+		isFinshed = true;
+		break;
+	}
 	default:
 	{
-		printf("Lua chon khong hop le! Vui long thu lai.");
+		printf("Lua chon khong hop le! Vui long thu lai.\n");
 		break;
 	}
 		//}*/
 	}
+}while (!isFinshed);
+	
+	printf("Cam on ban da su dung chuong trinh!\n");
+	printf("Hen gap lai!\n");
+	printf("====================================\n");
+	printf("\n\n");
+
+
 }
 
 int main()
