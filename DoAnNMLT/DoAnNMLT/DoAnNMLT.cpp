@@ -32,6 +32,7 @@ int maDocGiaMuonSach[MAX_DOC_GIA];
 char ngayMuonSach[MAX_DOC_GIA][MAX_STR];
 char ngayTraSachDuKien[MAX_DOC_GIA][MAX_STR];
 char ngayTraSachThucTe[MAX_DOC_GIA][MAX_STR];
+float tienPhat[MAX_DOC_GIA];
 int ISBN_SachMuon[MAX_DOC_GIA][10]; // mỗi đọc giả được mượn tối đa 10 cuốn khác nhau.
 
 void hienThiPoster()
@@ -55,7 +56,7 @@ void showMenu()
 	bool isFinshed = false;
 	do
 	{
-		printf("=== Menu Quan Li Thu Vien ===\n");
+		printf("\n=== Menu Quan Li Thu Vien ===\n");
 		printf("1. Quan li doc gia\n");
 		printf("2. Quan li sach\n");
 		printf("3. Lap phieu muon sach\n");
@@ -179,29 +180,17 @@ void showMenu()
 			break;
 		}
 		case '3':
-		{
-			printf("Lap phieu muon sach.");
-
-			/*{
-				phieumuon[numberOfPhieumuon] = MuonSach(arrReaders, n, arrBooks, m);
-				numberOfPhieumuon++;
-			}
-
-			{
-				phieumuon[numberOfPhieumuon] = MuonSach(arrReaders, n, arrBooks, m);
-				numberOfPhieumuon++;
-			}
-
-			for (int i = 0; i < numberOfPhieumuon; i++)
-			{
-				printf( phieumuon[i].madocgia );
-			}
-			break;*/
+		{	printf("\n---------------------------------\n");
+			printf("Lap phieu muon sach.\n");
+			phieuMuonSach(
+				maDocGiaMuonSach, maDocGia, ngayMuonSach, ngayTraSachDuKien, 
+				ngayTraSachThucTe, tienPhat, ISBN_SachMuon, ISBN, soLuongSach, 
+				indexDocGia, indexSach, &indexDocGia);
 			break;
 		}
 		case '4':
 		{
-			printf("Lap phieu tra sach.");
+			printf("Lap phieu tra sach.\n");
 			//		int maDocGia;long ISBN[] = { 1,2,4 };
 			//		TraSach(phieumuon, numberOfPhieumuon, maDocGia, ISBN, numOfIsbn, arrBooks, m);
 			//		break;
@@ -209,7 +198,7 @@ void showMenu()
 		}
 		case '5':
 		{
-			//		printf( "Ban chon Cac thong ke co ban." );
+			//		printf( "Ban chon Cac thong ke co ban.\n" );
 			//		printf( "Nhap lua chon (a-f): ";
 			//		printf( "   a. Thong ke so luong sach trong thu vien" );
 			//		printf( "   b. Thong ke so luong sach theo the loai" );
@@ -374,7 +363,7 @@ int main()
 	soLuongSach[4] = 12;
 
 	showMenu();
-	tinhNgayngayTraSachDuKien("30-11-2024", ngayTraSachDuKien[0]);
+	// tinhNgayngayTraSachDuKien("30-11-2024", ngayTraSachDuKien[0]);
 
 	return 0;
 }
