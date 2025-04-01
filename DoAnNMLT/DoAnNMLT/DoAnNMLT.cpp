@@ -141,7 +141,7 @@ void showMenu()
 				hienThiTatCaSach(ISBN, tenSach, tacGia, nhaXuatBan, namXuatBan, theLoai, giaSach, soLuongSach, indexSach);
 				break;
 			case 'b':
-				printf("Them sach.");
+				printf("Them sach.\n");
 				themSach(ISBN, tenSach, tacGia, nhaXuatBan, namXuatBan, theLoai, giaSach, soLuongSach, &indexSach);
 				break;
 			case 'c':
