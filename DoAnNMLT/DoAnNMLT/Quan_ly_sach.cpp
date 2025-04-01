@@ -274,3 +274,60 @@ void xoaSach(
         printf("Khong tim thay sach co ma ISBN %d\n", maISBN);
     }
 }
+
+void timKiemSachTheoISBN(
+    int ISBN[], char tenSach[][MAX_STR],
+    char tacGia[][MAX_STR], char nhaXuatBan[][MAX_STR],
+    int namXuatBan[], char theLoai[][MAX_STR],
+    float giaSach[], int soLuongSach[],
+    int indexSach)
+{
+    printf(">>>Nhap ma ISBN sach muon tim: ");
+    int maISBN;
+    scanf_s("%d", &maISBN);
+    while (getchar() != '\n')
+        ;
+    bool isTonTai = false;
+    for (int i = 0; i < indexSach; i++)
+    {
+        if (ISBN[i] == maISBN)
+        {
+            isTonTai = true;
+            printf("Thong tin sach muon tim \n");
+            hienThiTieuDeSach();
+            hienThiSachTheoIndex(ISBN, tenSach, tacGia, nhaXuatBan, namXuatBan, theLoai, giaSach, soLuongSach, i);
+        }
+        
+    }
+    if (!isTonTai)
+    {
+        printf("Khong tim thay sach co ma ISBN %d\n", maISBN);
+    }
+}
+void timKiemSachTheoTenSach(
+    int ISBN[], char tenSach[][MAX_STR],
+    char tacGia[][MAX_STR], char nhaXuatBan[][MAX_STR],
+    int namXuatBan[], char theLoai[][MAX_STR],
+    float giaSach[], int soLuongSach[],
+    int indexSach)
+{
+    char tenSachTimKiem[MAX_STR];
+    printf(">>>Nhap ten sach muon tim: ");
+    gets_s(tenSachTimKiem, MAX_STR);
+    bool isTonTai = false;
+    for (int i = 0; i < indexSach; i++)
+    {
+        if (strcmp(tenSach[i], tenSachTimKiem) == 0)
+        {
+            isTonTai = true;
+            printf("Thong tin sach muon tim \n");
+            hienThiTieuDeSach();
+            hienThiSachTheoIndex(ISBN, tenSach, tacGia, nhaXuatBan, namXuatBan, theLoai, giaSach, soLuongSach, i);
+        }
+        
+    }
+    if (!isTonTai)
+    {
+        printf("Khong tim thay sach co ten %s\n", tenSachTimKiem);
+    }
+}

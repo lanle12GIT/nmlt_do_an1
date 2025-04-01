@@ -153,11 +153,11 @@ void showMenu()
 				break;
 			case 'e':
 				printf("Tim kiem sach theo ISBN.\n");
-
+				timKiemSachTheoISBN(ISBN, tenSach, tacGia, nhaXuatBan, namXuatBan, theLoai, giaSach, soLuongSach, indexSach);
 				break;
 			case 'f':
 				printf("Tim kiem sach theo ten sach.\n");
-
+				timKiemSachTheoTenSach(ISBN, tenSach, tacGia, nhaXuatBan, namXuatBan, theLoai, giaSach, soLuongSach, indexSach);
 				break;
 			case 'g':
 				isBreak = true;
