@@ -1,5 +1,6 @@
 ﻿#include <stdio.h>
 #include "HeaderSach.h"
+#include <string.h>
 
 void hienThiTieuDeSach()
 {
@@ -203,7 +204,70 @@ void chinhSuaSach(
             hienThiTieuDeSach();
             hienThiSachTheoIndex(ISBN, tenSach, tacGia, nhaXuatBan, namXuatBan, theLoai, giaSach, soLuongSach, i);
         }
-        
+    }
+    if (!isTonTai)
+    {
+        printf("Khong tim thay sach co ma ISBN %d\n", maISBN);
+    }
+}
+void xoaSach(
+    int ISBN[], char tenSach[][MAX_STR],
+    char tacGia[][MAX_STR], char nhaXuatBan[][MAX_STR],
+    int namXuatBan[], char theLoai[][MAX_STR],
+    float giaSach[], int soLuongSach[],
+    int *indexSach)
+{
+    printf(">>>Nhap ma sach can xoa: ");
+    int maISBN;
+    scanf_s("%d", &maISBN);
+    while (getchar() != '\n')
+        ;
+    bool isTonTai = false;
+    for (int i = 0; i < *indexSach; i++)
+    {
+        if (ISBN[i] == maISBN)
+        {
+            isTonTai = true;
+            printf("Thong tin sach muon xoa \n");
+            hienThiTieuDeSach();
+            hienThiSachTheoIndex(ISBN, tenSach, tacGia, nhaXuatBan, namXuatBan, theLoai, giaSach, soLuongSach, i);
+
+            printf("Ban co chac chan muon xoa sach nay khong? (1: Co, 0: Khong): ");
+            int luaChonXoa;
+            scanf_s("%d", &luaChonXoa);
+            while (getchar() != '\n')
+                ;
+            if (luaChonXoa == 1)
+            {
+                // Xóa thông tin sách bằng cách dịch chuyển các phần tử phía sau lên trước
+                for (int j = i; j < *indexSach - 1; j++)
+                {
+                    ISBN[j] = ISBN[j + 1];
+                    strcpy_s(tenSach[j], tenSach[j + 1]);
+                    strcpy_s(tacGia[j], tacGia[j + 1]);
+                    strcpy_s(nhaXuatBan[j], nhaXuatBan[j + 1]);
+                    namXuatBan[j] = namXuatBan[j + 1];
+                    strcpy_s(theLoai[j], theLoai[j + 1]);
+                    giaSach[j] = giaSach[j + 1];
+                    soLuongSach[j] = soLuongSach[j + 1];
+                }
+                (*indexSach)--;
+                printf("Xoa sach thanh cong!\n");
+                hienThiTieuDeSach();
+                hienThiTatCaSach(ISBN, tenSach, tacGia, nhaXuatBan, namXuatBan, theLoai, giaSach, soLuongSach, *indexSach);
+            }
+            else if (luaChonXoa == 0)
+            {
+                printf("Khong xoa sach.\n");
+                hienThiTatCaSach(ISBN, tenSach, tacGia, nhaXuatBan, namXuatBan, theLoai, giaSach, soLuongSach, *indexSach);
+                return;
+            }
+            else if (luaChonXoa != 1)
+            {
+                printf("Lua chon khong hop le. Khong xoa sach.\n");
+                return;
+            }
+        }
     }
     if (!isTonTai)
     {

@@ -72,7 +72,7 @@ void showMenu()
 			printf("   c. Chinh sua thong tin mot doc gia\n");
 			printf("   d. Xoa thong tin mot doc gia\n");
 			printf("   e. Tim kiem doc gia theo CMND\n");
-			printf("   f. Tim kiem sach theo ho ten\n");
+			printf("   f. Tim kiem doc gia theo ho ten\n");
 			printf("   g. Thoat\n");
 			printf(">>>>>Nhap lua chon cua ban: ");
 			char subChoice[2];
@@ -149,7 +149,7 @@ void showMenu()
 				break;
 			case 'd':
 				printf("Xoa thong tin sach.\n");
-
+				xoaSach(ISBN, tenSach, tacGia, nhaXuatBan, namXuatBan, theLoai, giaSach, soLuongSach, &indexSach);
 				break;
 			case 'e':
 				printf("Tim kiem sach theo ISBN.\n");
