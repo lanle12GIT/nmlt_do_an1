@@ -28,7 +28,8 @@ void themDocGia(
         printf("Khong the them doc gia moi. So luong doc gia da dat toi da.\n");
         return;
     }
-    if (*indexDocGia == 0){
+    if (*indexDocGia == 0)
+    {
         maDocGia[*indexDocGia] = 1001; // Gán mã độc giả đầu tiên là 1001
     }
     else
@@ -65,7 +66,6 @@ void themDocGia(
     hienThiDocGiaTheoindexDocGia(*indexDocGia, maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe);
     (*indexDocGia)++; // Cap nhat indexDocGia
 }
-
 
 // Hàm in tiêu đề bảng
 void hienThiTieuDe()
@@ -156,11 +156,16 @@ void chinhSuaDocGia(
     int maDocGiaChinhSua;
     printf(">>>>> Nhap ma doc gia muon chinh sua: ");
     scanf_s("%d", &maDocGiaChinhSua);
+    while (getchar() != '\n')
+        ;
 
+    bool isTonTai = false;
     for (int i = 0; i < indexDocGia; i++)
     {
         if (maDocGia[i] == maDocGiaChinhSua)
         {
+            isTonTai = true;
+            printf("=== Thong tin doc gia muon chinh sua ===\n");
             hienThiDocGiaTheoindexDocGia(i, maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe);
 
             printf("=== Chon thong tin muon thay doi===\n");
@@ -232,6 +237,10 @@ void chinhSuaDocGia(
             hienThiDocGiaTheoindexDocGia(i, maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe);
         }
     }
+    if (!isTonTai)
+    {
+        printf("Khong tim thay doc gia co ma %d\n", maDocGiaChinhSua);
+    }
 }
 void xoaDocGia(
     int maDocGia[],
@@ -248,11 +257,15 @@ void xoaDocGia(
     int maDocGiaXoa;
     printf(">>>>> Nhap ma doc gia muon xoa: ");
     scanf_s("%d", &maDocGiaXoa);
-
+    while (getchar() != '\n')
+        ;
+    bool isTonTai = false;
     for (int i = 0; i < *indexDocGia; i++)
     {
         if (maDocGia[i] == maDocGiaXoa)
-        {   printf("=== Thong tin doc gia muon xoa ===\n");
+        {
+            isTonTai = true;
+            printf("=== Thong tin doc gia muon xoa ===\n");
             hienThiDocGiaTheoindexDocGia(i, maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe);
             printf("=== Ban co chac chan muon xoa doc gia nay khong? (1: Co, 0: Khong) ===\n");
             int luaChonXoa;
@@ -283,14 +296,15 @@ void xoaDocGia(
             }
             (*indexDocGia)--; // Giảm số lượng độc giả đi 1
             printf("Xoa doc gia thanh cong!\n");
+            hienThiTatCaDocGia(*indexDocGia, maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe);
             break;
         }
-        else if (i == *indexDocGia - 1)
-        {
-            printf("Khong tim thay doc gia co ma %d\n", maDocGiaXoa);
-        }
     }
-    hienThiTatCaDocGia(*indexDocGia, maDocGia, hoTen, cmnd, ngayThangNamSinh, gioiTinh, email, diaChi, ngayMoThe, ngayKetThucThe);
+
+    if (!isTonTai)
+    {
+        printf("Khong tim thay doc gia co ma %d\n", maDocGiaXoa);
+    }
 }
 void timKiemDocGiaTheoCMND(
     int maDocGia[],
