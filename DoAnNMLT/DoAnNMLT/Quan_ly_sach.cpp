@@ -129,52 +129,83 @@ void chinhSuaSach(
     float giaSach[], int soLuongSach[],
     int indexSach)
 {
-    printf("Nhap ma ISBN cua sach can chinh sua: ");
+    printf(">>>Nhap ma ISBN cua sach can chinh sua: ");
     int maISBN;
     scanf_s("%d", &maISBN);
     while (getchar() != '\n')
         ;
-
-    bool isFound = false;
+    bool isTonTai = false;
     for (int i = 0; i < indexSach; i++)
     {
         if (ISBN[i] == maISBN)
         {
-            isFound = true;
+            isTonTai = true;
+            printf("Thong tin sach muon chinh sua \n");
+            hienThiTieuDeSach();
+            hienThiSachTheoIndex(ISBN, tenSach, tacGia, nhaXuatBan, namXuatBan, theLoai, giaSach, soLuongSach, i);
 
-            printf("Nhap ten sach moi: ");
-            gets_s(tenSach[i], MAX_STR);
+            printf("=== Chon thong tin muon thay doi===\n");
+            printf("1. Ten sach\n");
+            printf("2. Tac gia\n");
+            printf("3. Nha xuat ban\n");
+            printf("4. Nam xuat ban\n");
+            printf("5. The loai\n");
+            printf("6. Gia sach\n");
+            printf("7. So luong sach\n");
 
-            printf("Nhap tac gia moi: ");
-            gets_s(tacGia[i], MAX_STR);
-
-            printf("Nhap nha xuat ban moi: ");
-            gets_s(nhaXuatBan[i], MAX_STR);
-
-            printf("Nhap nam xuat ban moi: ");
-            scanf_s("%d", &namXuatBan[i]);
+            printf(">>>>> Nhap lua chon cua ban: ");
+            int luaChon;
+            scanf_s("%d", &luaChon);
             while (getchar() != '\n')
                 ;
-
-            printf("Nhap the loai moi: ");
-            gets_s(theLoai[i], MAX_STR);
-
-            printf("Nhap gia sach moi: ");
-            scanf_s("%f", &giaSach[i]);
-            while (getchar() != '\n')
-                ;
-
-            printf("Nhap so luong sach moi: ");
-            scanf_s("%d", &soLuongSach[i]);
-            while (getchar() != '\n')
-                ;
+            switch (luaChon)
+            {
+            case 1:
+                printf(">>>Nhap ten sach moi: ");
+                gets_s(tenSach[i], MAX_STR);
+                break;
+            case 2:
+                printf(">>>Nhap tac gia moi: ");
+                gets_s(tacGia[i], MAX_STR);
+                break;
+            case 3:
+                printf(">>>Nhap nha xuat ban moi: ");
+                gets_s(nhaXuatBan[i], MAX_STR);
+                break;
+            case 4:
+                printf(">>>Nhap nam xuat ban moi: ");
+                scanf_s("%d", &namXuatBan[i]);
+                while (getchar() != '\n')
+                    ;
+                break;
+            case 5:
+                printf(">>>Nhap the loai moi: ");
+                gets_s(theLoai[i], MAX_STR);
+                break;
+            case 6:
+                printf(">>>Nhap gia sach moi: ");
+                scanf_s("%f", &giaSach[i]);
+                while (getchar() != '\n')
+                    ;
+                break;
+            case 7:
+                printf(">>>Nhap so luong sach moi: ");
+                scanf_s("%d", &soLuongSach[i]);
+                while (getchar() != '\n')
+                    ;
+                break;
+            default:
+                printf("Lua chon khong hop le\n");
+                break;
+            }
 
             printf("Chinh sua sach thanh cong!\n");
             hienThiTieuDeSach();
             hienThiSachTheoIndex(ISBN, tenSach, tacGia, nhaXuatBan, namXuatBan, theLoai, giaSach, soLuongSach, i);
         }
+        
     }
-    if (!isFound)
+    if (!isTonTai)
     {
         printf("Khong tim thay sach co ma ISBN %d\n", maISBN);
     }

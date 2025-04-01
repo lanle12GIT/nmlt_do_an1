@@ -14,3 +14,9 @@ void themSach(
     int namXuatBan[], char theLoai[][MAX_STR],
     float giaSach[], int soLuongSach[],
     int *indexSach);
+void chinhSuaSach(
+    int ISBN[], char tenSach[][MAX_STR],
+    char tacGia[][MAX_STR], char nhaXuatBan[][MAX_STR],
+    int namXuatBan[], char theLoai[][MAX_STR],
+    float giaSach[], int soLuongSach[],
+    int indexSach);
