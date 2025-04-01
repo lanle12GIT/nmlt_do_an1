@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DoAnNMLT.cpp" />
+    <ClCompile Include="Lap_phieu_muon.cpp" />
     <ClCompile Include="quan_ly_doc_gia.cpp" />
     <ClCompile Include="Quan_ly_sach.cpp" />
     <ClCompile Include="Time.cpp" />
