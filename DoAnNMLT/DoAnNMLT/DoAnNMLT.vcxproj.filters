@@ -30,12 +30,18 @@
     <ClCompile Include="Lap_phieu_muon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Thong_ke.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HeaderDocGia.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HeaderSach.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HeaderThongKe.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

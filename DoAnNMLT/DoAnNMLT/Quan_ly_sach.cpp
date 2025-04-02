@@ -69,7 +69,7 @@ void themSach(
     {
         while (1)
         {
-            printf(">>>nhap ma ISBN: ");
+            printf(">>>>> Nhap ma ISBN: ");
             int temp;
             scanf_s("%d", &temp);
             bool isTonTai = false;
@@ -90,29 +90,29 @@ void themSach(
         while (getchar() != '\n')
             ;
 
-        printf(">>>Nhap ten sach: ");
+        printf(">>>>> Nhap ten sach: ");
         gets_s(tenSach[*indexSach], MAX_STR);
 
-        printf(">>>Nhap tac gia: ");
+        printf(">>>>> Nhap tac gia: ");
         gets_s(tacGia[*indexSach], MAX_STR);
 
-        printf(">>>Nhap nha xuat ban: ");
+        printf(">>>>> Nhap nha xuat ban: ");
         gets_s(nhaXuatBan[*indexSach], MAX_STR);
 
-        printf(">>>Nhap nam xuat ban: ");
+        printf(">>>>> Nhap nam xuat ban: ");
         scanf_s("%d", &namXuatBan[*indexSach]);
         while (getchar() != '\n')
             ;
 
-        printf(">>>Nhap the loai: ");
+        printf(">>>>> Nhap the loai: ");
         gets_s(theLoai[*indexSach], MAX_STR);
 
-        printf(">>>Nhap gia sach: ");
+        printf(">>>>> Nhap gia sach: ");
         scanf_s("%f", &giaSach[*indexSach]);
         while (getchar() != '\n')
             ;
 
-        printf(">>>Nhap so luong sach: ");
+        printf(">>>>> Nhap so luong sach: ");
         scanf_s("%d", &soLuongSach[*indexSach]);
         while (getchar() != '\n')
             ;
@@ -130,7 +130,7 @@ void chinhSuaSach(
     float giaSach[], int soLuongSach[],
     int indexSach)
 {
-    printf(">>>Nhap ma ISBN cua sach can chinh sua: ");
+    printf(">>>>> Nhap ma ISBN cua sach can chinh sua: ");
     int maISBN;
     scanf_s("%d", &maISBN);
     while (getchar() != '\n')
@@ -162,35 +162,35 @@ void chinhSuaSach(
             switch (luaChon)
             {
             case 1:
-                printf(">>>Nhap ten sach moi: ");
+                printf(">>>>> Nhap ten sach moi: ");
                 gets_s(tenSach[i], MAX_STR);
                 break;
             case 2:
-                printf(">>>Nhap tac gia moi: ");
+                printf(">>>>> Nhap tac gia moi: ");
                 gets_s(tacGia[i], MAX_STR);
                 break;
             case 3:
-                printf(">>>Nhap nha xuat ban moi: ");
+                printf(">>>>> Nhap nha xuat ban moi: ");
                 gets_s(nhaXuatBan[i], MAX_STR);
                 break;
             case 4:
-                printf(">>>Nhap nam xuat ban moi: ");
+                printf(">>>>> Nhap nam xuat ban moi: ");
                 scanf_s("%d", &namXuatBan[i]);
                 while (getchar() != '\n')
                     ;
                 break;
             case 5:
-                printf(">>>Nhap the loai moi: ");
+                printf(">>>>> Nhap the loai moi: ");
                 gets_s(theLoai[i], MAX_STR);
                 break;
             case 6:
-                printf(">>>Nhap gia sach moi: ");
+                printf(">>>>> Nhap gia sach moi: ");
                 scanf_s("%f", &giaSach[i]);
                 while (getchar() != '\n')
                     ;
                 break;
             case 7:
-                printf(">>>Nhap so luong sach moi: ");
+                printf(">>>>> Nhap so luong sach moi: ");
                 scanf_s("%d", &soLuongSach[i]);
                 while (getchar() != '\n')
                     ;
@@ -217,7 +217,7 @@ void xoaSach(
     float giaSach[], int soLuongSach[],
     int *indexSach)
 {
-    printf(">>>Nhap ma sach can xoa: ");
+    printf(">>>>> Nhap ma sach can xoa: ");
     int maISBN;
     scanf_s("%d", &maISBN);
     while (getchar() != '\n')
@@ -282,7 +282,7 @@ void timKiemSachTheoISBN(
     float giaSach[], int soLuongSach[],
     int indexSach)
 {
-    printf(">>>Nhap ma ISBN sach muon tim: ");
+    printf(">>>>> Nhap ma ISBN sach muon tim: ");
     int maISBN;
     scanf_s("%d", &maISBN);
     while (getchar() != '\n')
@@ -312,7 +312,7 @@ void timKiemSachTheoTenSach(
     int indexSach)
 {
     char tenSachTimKiem[MAX_STR];
-    printf(">>>Nhap ten sach muon tim: ");
+    printf(">>>>> Nhap ten sach muon tim: ");
     gets_s(tenSachTimKiem, MAX_STR);
     bool isTonTai = false;
     for (int i = 0; i < indexSach; i++)

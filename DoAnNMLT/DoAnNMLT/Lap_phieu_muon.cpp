@@ -157,7 +157,7 @@ void phieuMuonSach(
     int *indexThongTinMuonTraSach)
 {
     int maDocGiatemp;
-    printf(">>>Nhap ma doc gia muon muon sach:");
+    printf(">>>>> Nhap ma doc gia muon muon sach: ");
     scanf_s("%d", &maDocGiatemp);
 
     bool isTonTai = false;
@@ -168,7 +168,7 @@ void phieuMuonSach(
             isTonTai = true;
             maDocGiaMuonSach[*indexThongTinMuonTraSach] = maDocGiatemp;
 
-            printf(">>>Nhap ngay muon sach (dd-mm-yyyy): ");
+            printf(">>>>> Nhap ngay muon sach (dd-mm-yyyy): ");
             while (getchar() != '\n')
                 ;
             enterDateTime(ngayMuonSach[*indexThongTinMuonTraSach]);
@@ -181,7 +181,7 @@ void phieuMuonSach(
             do
             {
 
-                printf("\n>>>Nhap so sach muon muon:\n");
+                printf("\n>>>>> Nhaphap so sach muon muon:\n");
                 scanf_s("%d", &soSachMuon);
                 while (getchar() != '\n')
                     ;
@@ -198,7 +198,7 @@ void phieuMuonSach(
                 bool isTonTaiSach = false;
                 do
                 {
-                    printf("\n>>>Nhap ma ISBN cua sach %d:", soSach + 1);
+                    printf("\n>>>>> Nhaphap ma ISBN cua sach %d: ", soSach + 1);
                     scanf_s("%d", &ISBNtemp);
                     while (getchar() != '\n')
                         ;
@@ -209,7 +209,7 @@ void phieuMuonSach(
                         {
                             isTonTaiSach = true;
                             ISBN_SachMuon[*indexThongTinMuonTraSach][soSach] = ISBNtemp;
-                            soLuongSach[*indexThongTinMuonTraSach]--;
+                            soLuongSach[j]--;
                         }
                     }
                     if (!isTonTaiSach)
@@ -255,7 +255,7 @@ void phieuTraSach(
     bool isTonTai = false;
     do
     {
-        printf(">>>Nhap ma doc gia muon tra sach:");
+        printf(">>>>> Nhap ma doc gia muon tra sach: ");
         scanf_s("%d", &maDocGiaTraSach);
         while (getchar() != '\n')
             ;
@@ -265,7 +265,7 @@ void phieuTraSach(
             if (maDocGiaMuonSach[i] == maDocGiaTraSach)
             {
                 isTonTai = true;
-                printf(">>> Nhap ngay tra thuc te:");
+                printf(">>>>> Nhap ngay tra thuc te: ");
                 enterDateTime(ngayTraSachThucTe[i]);
                 int result = tinhSoNgayTraTre(ngayTraSachDuKien[i], ngayTraSachThucTe[i]);
                 printf(" so ngay tra sach tre : %d * 5000", result);
@@ -274,7 +274,7 @@ void phieuTraSach(
                 int soLuongSachTra;
                 do
                 {
-                    printf("\n>>>Nhap so sach tra:\n");
+                    printf("\n>>>>> Nhaphap so sach tra:\n");
                     scanf_s("%d", &soLuongSachTra);
                     while (getchar() != '\n')
                         ;
@@ -288,20 +288,20 @@ void phieuTraSach(
                 {
                     int ISBNtemp;
 
-                    printf(">>>Nhap ma ISBN cua sach muon tra: ");
+                    printf(">>>>> Nhap ma ISBN cua sach muon tra: ");
                     scanf_s("%d", &ISBNtemp);
                     while (getchar() != '\n')
                         ;
 
                     bool isTonTaiSach = false;
-                    for (int k = 0; k < soLuongSachMuon[i]; i++)
+                    for (int k = 0; k < soLuongSachMuon[i]; k++)
                     {
                         isTonTaiSach = false;
-                        if (ISBN_SachMuon[i][k] = ISBNtemp)
+                        if (ISBN_SachMuon[i][k] == ISBNtemp)
                         {
                             isTonTaiSach = true;
                             ISBN_SachMuon[i][k] = 0;
-                            for (int l = 0; l < indexSach; i++)
+                            for (int l = 0; l < indexSach; l++)
                             {
                                 if (ISBN[l] == ISBNtemp)
                                 {
@@ -309,7 +309,8 @@ void phieuTraSach(
                                     break;
                                 }
                             }
-                            printf("Sach voi ma ISBN %d da duoc tra thanh cong.\n", ISBNtemp);
+                            printf("---------------------------------\n");
+                            printf("Sach voi ma ISBN: %d da duoc tra thanh cong.\n", ISBNtemp);
                             break;
                         }
                     }
@@ -332,9 +333,9 @@ void phieuTraSach(
                         {
                             if (ISBN[l] == ISBN_SachMuon[i][k])
                             {
-                                printf("Ban khong tra/ lam mat sach nay se bi phat 200 gia tien\n");
+                                printf("\t ====> Ban khong tra/ lam mat sach nay se bi phat 200% gia tien\n");
                                 tienDenSach = giaSach[l] * 2;
-                                printf(" Ma %d, gia sach =%f , tien den sach =%f \n", ISBN_SachMuon[i][k], giaSach[l], tienDenSach);
+                                printf("\t Ma ISBN cua sach bi mat: %d, gia sach = %0.2f , tien den sach = %0.2f \n", ISBN_SachMuon[i][k], giaSach[l], tienDenSach);
                                 tienPhat[i] += tienDenSach;
                                 break;
                             }
@@ -342,11 +343,11 @@ void phieuTraSach(
                     }
                 }
             }
-            tienPhat[i] > 0 ? printf("So tien bi phat: %f \n", tienPhat[i]) : printf("\n");
+            tienPhat[i] > 0 ? printf("So tien bi phat: %0.2f \n", tienPhat[i]) : printf("\n");
         }
 
-        printf(" Ma doc gia %d da tra sach thanh cong!!!", maDocGiaTraSach);
+        printf("====> Ma doc gia %d da tra sach thanh cong!!!", maDocGiaTraSach);
         if (!isTonTai)
-            printf(" Ma doc gia %d nay khong dung, vui long kiem tra lai \n", maDocGiaTraSach);
+            printf("====> Ma doc gia %d nay khong dung, vui long kiem tra lai \n", maDocGiaTraSach);
     } while (!isTonTai);
 }

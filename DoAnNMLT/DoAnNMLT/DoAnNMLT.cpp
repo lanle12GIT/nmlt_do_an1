@@ -3,6 +3,7 @@
 #include "HeaderDocGia.h"
 #include "HeaderSach.h"
 #include "HeaderMuonTraSach.h"
+#include "HeaderThongKe.h"
 
 int indexDocGia = 0;
 // Các mảng lưu trữ thông tin độc giả
@@ -57,7 +58,8 @@ void showMenu()
 {
 	bool isFinshed = false;
 	do
-	{   printf("\n--------------------------------\n");
+	{
+		printf("\n#################################\n");
 		printf("\n=== Menu Quan Li Thu Vien ===\n");
 		printf("1. Quan li doc gia\n");
 		printf("2. Quan li sach\n");
@@ -65,7 +67,7 @@ void showMenu()
 		printf("4. Lap phieu tra sach\n");
 		printf("5. Cac thong ke co ban\n");
 		printf("6. Thoat\n");
-		printf(">>>>>Nhap lua chon cua ban: ");
+		printf(">>>>> Nhap lua chon cua ban: ");
 		char choice[2]; // Kích thước 10 ký tự (9 ký tự + 1 null terminator)
 		gets_s(choice, 2);
 
@@ -78,7 +80,7 @@ void showMenu()
 			{
 				printf("\n---------------------------------\n");
 				printf("------Quan li doc gia.-----\n");
-				printf(">>>>>Nhap lua chon (a-g): \n");
+				printf(">>>>> Nhap lua chon (a-g): \n");
 				printf("   a. Xem danh sach doc gia trong thu vien\n");
 				printf("   b. Them doc gia\n");
 				printf("   c. Chinh sua thong tin mot doc gia\n");
@@ -86,7 +88,7 @@ void showMenu()
 				printf("   e. Tim kiem doc gia theo CMND\n");
 				printf("   f. Tim kiem doc gia theo ho ten\n");
 				printf("   g. Thoat\n");
-				printf(">>>>>Nhap lua chon cua ban: ");
+				printf(">>>>> Nhap lua chon cua ban: ");
 				char subChoice[2];
 				gets_s(subChoice, 2);
 
@@ -152,7 +154,7 @@ void showMenu()
 
 				printf("\n---------------------------------\n");
 				printf("------Quan li sach.-----\n");
-				printf(">>>>>Nhap lua chon (a-f): \n");
+				printf(">>>>> Nhap lua chon (a-f): \n");
 				printf("   a. Xem danh sach cac sach trong thu vien\n");
 				printf("   b. Them sach\n");
 				printf("   c. Chinh sua thong tin mot quyen sach\n");
@@ -160,7 +162,7 @@ void showMenu()
 				printf("   e. Tim kiem sach theo ISBN\n");
 				printf("   f. Tim kiem sach theo ten sach\n");
 				printf("   g. Thoat\n");
-				printf(">>>>>Nhap lua chon cua ban: ");
+				printf(">>>>> Nhap lua chon cua ban: ");
 				char choice[2]; // Kích thước 2 ký tự (1 ký tự + 1 null terminator)
 				gets_s(choice, 2);
 				switch (choice[0])
@@ -234,46 +236,49 @@ void showMenu()
 		}
 		case '5':
 		{
-			//		printf( "Ban chon Cac thong ke co ban.\n" );
-			//		printf( "Nhap lua chon (a-f): ";
-			//		printf( "   a. Thong ke so luong sach trong thu vien" );
-			//		printf( "   b. Thong ke so luong sach theo the loai" );
-			//		printf( "   c. Thong ke so luong doc gia" );
-			//		printf( "   d. Thong ke so luong doc gia theo gioi tinh" );
-			//		printf( "   e. Thong ke so sach dang duoc muon" );
-			//		printf( "   f. Thong ke danh sach doc gia bi tre han" );
-			//		char subChoice;
-			//		cin >> subChoice;
-			//		switch (subChoice) {
-			//		case 'a':
-			//			printf( "Thong ke so luong sach trong thu vien." );
-			//			numberOfBooks(arrBooks, m);
-			//			break;
-			//		case 'b':
-			//			printf( "Thong ke so luong sach theo the loai." );
-			//			numberOfBooksByCategory(arrBooks, m);
-			//			break;
-			//		case 'c':
-			//			printf( "Thong ke so luong doc gia." );
-			//			numberOfReaders(arrInfReaders, n);
-			//			break;
-			//		case 'd':
-			//			printf( "Thong ke so luong doc gia theo gioi tinh." );
-			//			numberofReadersBySex(arrInfReaders, n);
-			//			break;
-			//		case 'e':
-			//			printf( "Thong ke so sach dang duoc muon." );
-			//			NumberOfBooksBeingBorrowed(phieumuon, numberOfPhieumuon);
-			//			break;
-			//		case 'f':
-			//			printf( "Thong ke danh sach doc gia bi tre han." );
-			//			OverdueReadersList(phieumuon, numberOfPhieumuon);
-			//			break;
-			//		default:
-			//			printf( "Lua chon khong hop le!" );
-			//			break;
-			//		}
-			//		break;
+			printf("\n---------------------------------\n");
+			printf("Ban chon Cac thong ke co ban.\n");
+			printf(">>>>> Nhap lua chon (a-f): \n");
+			printf("   a. Thong ke so luong sach trong thu vien\n");
+			printf("   b. Thong ke so luong sach theo the loai\n");
+			printf("   c. Thong ke so luong doc gia\n");
+			printf("   d. Thong ke so luong doc gia theo gioi tinh\n");
+			printf("   e. Thong ke so sach dang duoc muon\n");
+			printf("   f. Thong ke danh sach doc gia bi tre han\n");
+			printf("   g. Thoat\n");
+			char subChoice[2];
+			gets_s(subChoice, 2);
+			switch (subChoice[0])
+			{
+
+			case 'a':
+				printf("Thong ke so luong sach trong thu vien.");
+				thongKeSoLuongSachTrongThuVien(ISBN, soLuongSach, indexSach);
+				break;
+			case 'b':
+				printf("Thong ke so luong sach theo the loai.");
+
+				break;
+			case 'c':
+				printf("Thong ke so luong doc gia.");
+
+				break;
+			case 'd':
+				printf("Thong ke so luong doc gia theo gioi tinh.");
+
+				break;
+			case 'e':
+				printf("Thong ke so sach dang duoc muon.");
+
+				break;
+			case 'f':
+				printf("Thong ke danh sach doc gia bi tre han.");
+
+				break;
+			default:
+				printf("Lua chon khong hop le!");
+				break;
+			}
 			break;
 		}
 		case '6':

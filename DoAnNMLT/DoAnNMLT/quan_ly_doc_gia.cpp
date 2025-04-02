@@ -319,7 +319,7 @@ void timKiemDocGiaTheoCMND(
     int indexDocGia)
 {
     char cmndTimKiem[MAX_STR];
-    printf(">>>>>Nhap CMND doc gia muon tim: ");
+    printf(">>>>> Nhap CMND doc gia muon tim: ");
     gets_s(cmndTimKiem, MAX_STR);
 
     for (int i = 0; i < indexDocGia; i++)
@@ -348,7 +348,7 @@ void timKiemDocGiaTheoHoTen(
     int indexDocGia)
 {
     char hoTenTimKiem[MAX_STR];
-    printf(">>>>>Nhap ho ten doc gia muon tim: ");
+    printf(">>>>> Nhap ho ten doc gia muon tim: ");
     gets_s(hoTenTimKiem, MAX_STR);
 
     for (int i = 0; i < indexDocGia; i++)
