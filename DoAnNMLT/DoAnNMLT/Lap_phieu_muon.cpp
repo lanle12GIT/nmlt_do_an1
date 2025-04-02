@@ -97,7 +97,9 @@ void hienThiPhieuMuonTraSach(
     char ngayTraSachDuKien[][MAX_STR],
     char ngayTraSachThucTe[][MAX_STR],
     float tienPhat[],
-    int ISBN_SachMuon[][10], int soLuongSachMuon[], int indexThongTinMuonTraSach)
+    int ISBN_SachMuon[][10], int soLuongSachMuon[], int indexThongTinMuonTraSach,
+    bool isPhieuMuon
+)
 {
     printf("\n *********************************************************************************\n");
     printf(" |                                                                               |\n");
@@ -181,7 +183,7 @@ void phieuMuonSach(
             do
             {
 
-                printf("\n>>>>> Nhaphap so sach muon muon:\n");
+                printf("\n>>>>> Nhap so sach muon muon:\n");
                 scanf_s("%d", &soSachMuon);
                 while (getchar() != '\n')
                     ;
@@ -198,7 +200,7 @@ void phieuMuonSach(
                 bool isTonTaiSach = false;
                 do
                 {
-                    printf("\n>>>>> Nhaphap ma ISBN cua sach %d: ", soSach + 1);
+                    printf("\n>>>>> Nhap ma ISBN cua sach %d: ", soSach + 1);
                     scanf_s("%d", &ISBNtemp);
                     while (getchar() != '\n')
                         ;
@@ -233,7 +235,7 @@ void phieuMuonSach(
         hienThiPhieuMuonTraSach(
             maDocGiaMuonSach, ngayMuonSach, ngayTraSachDuKien,
             ngayTraSachThucTe, tienPhat, ISBN_SachMuon, soLuongSachMuon,
-            *indexThongTinMuonTraSach);
+            *indexThongTinMuonTraSach, true);
 
         (*indexThongTinMuonTraSach)++;
     }
@@ -274,7 +276,7 @@ void phieuTraSach(
                 int soLuongSachTra;
                 do
                 {
-                    printf("\n>>>>> Nhaphap so sach tra:\n");
+                    printf("\n>>>>> Nhap so sach tra:\n");
                     scanf_s("%d", &soLuongSachTra);
                     while (getchar() != '\n')
                         ;
