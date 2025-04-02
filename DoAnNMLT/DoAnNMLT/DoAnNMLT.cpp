@@ -28,6 +28,7 @@ float giaSach[MAX_SACH];
 int soLuongSach[MAX_SACH];
 
 // Các mảng lưu trữ thông tin mượn trả sách
+int indexThongTinMuonTraSach = 0;
 int maDocGiaMuonSach[MAX_DOC_GIA];
 char ngayMuonSach[MAX_DOC_GIA][MAX_STR];
 char ngayTraSachDuKien[MAX_DOC_GIA][MAX_STR];
@@ -56,7 +57,7 @@ void showMenu()
 {
 	bool isFinshed = false;
 	do
-	{
+	{   printf("\n--------------------------------\n");
 		printf("\n=== Menu Quan Li Thu Vien ===\n");
 		printf("1. Quan li doc gia\n");
 		printf("2. Quan li sach\n");
@@ -94,44 +95,44 @@ void showMenu()
 				case 'a':
 					printf("Xem danh sach doc gia trong thu vien.\n");
 					hienThiTatCaDocGia(
-						indexDocGia, maDocGia, hoTen, cmnd, 
-						ngayThangNamSinh, gioiTinh, email, 
+						indexDocGia, maDocGia, hoTen, cmnd,
+						ngayThangNamSinh, gioiTinh, email,
 						diaChi, ngayMoThe, ngayKetThucThe);
 					break;
 				case 'b':
 					printf("Them doc gia.\n");
 					themDocGia(
-						maDocGia, hoTen, cmnd, ngayThangNamSinh, 
-						gioiTinh, email, diaChi, ngayMoThe, 
+						maDocGia, hoTen, cmnd, ngayThangNamSinh,
+						gioiTinh, email, diaChi, ngayMoThe,
 						ngayKetThucThe, &indexDocGia);
 					break;
 				case 'c':
 					printf("Chinh sua thong tin mot doc gia.\n");
 					chinhSuaDocGia(
 						maDocGia, hoTen, cmnd, ngayThangNamSinh,
-						 gioiTinh, email, diaChi, ngayMoThe, 
-						 ngayKetThucThe, indexDocGia);
+						gioiTinh, email, diaChi, ngayMoThe,
+						ngayKetThucThe, indexDocGia);
 					break;
 				case 'd':
 					printf("Xoa thong tin mot doc gia.\n");
 					xoaDocGia(
-						maDocGia, hoTen, cmnd, ngayThangNamSinh, 
-						gioiTinh, email, diaChi, ngayMoThe, 
+						maDocGia, hoTen, cmnd, ngayThangNamSinh,
+						gioiTinh, email, diaChi, ngayMoThe,
 						ngayKetThucThe, &indexDocGia);
 					break;
 				case 'e':
 					printf("Tim kiem doc gia theo CMND.\n");
 					timKiemDocGiaTheoCMND(
 						maDocGia, hoTen, cmnd, ngayThangNamSinh,
-						 gioiTinh, email, diaChi, ngayMoThe, 
-						 ngayKetThucThe, indexDocGia);
+						gioiTinh, email, diaChi, ngayMoThe,
+						ngayKetThucThe, indexDocGia);
 					break;
 				case 'f':
 					printf("Tim kiem doc gia theo ho ten.\n");
 					timKiemDocGiaTheoHoTen(
 						maDocGia, hoTen, cmnd, ngayThangNamSinh,
-						 gioiTinh, email, diaChi, ngayMoThe, 
-						 ngayKetThucThe, indexDocGia);
+						gioiTinh, email, diaChi, ngayMoThe,
+						ngayKetThucThe, indexDocGia);
 					break;
 				case 'g':
 					isBreak = true;
@@ -168,37 +169,37 @@ void showMenu()
 					printf("Xem danh sach cac sach trong thu vien.\n");
 					hienThiTatCaSach(
 						ISBN, tenSach, tacGia, nhaXuatBan, namXuatBan,
-						 theLoai, giaSach, soLuongSach, indexSach);
+						theLoai, giaSach, soLuongSach, indexSach);
 					break;
 				case 'b':
 					printf("Them sach.\n");
 					themSach(
 						ISBN, tenSach, tacGia, nhaXuatBan, namXuatBan,
-						 theLoai, giaSach, soLuongSach, &indexSach);
+						theLoai, giaSach, soLuongSach, &indexSach);
 					break;
 				case 'c':
 					printf("Chinh sua thong tin mot quyen sach.\n");
 					chinhSuaSach(
 						ISBN, tenSach, tacGia, nhaXuatBan, namXuatBan,
-						 theLoai, giaSach, soLuongSach, indexSach);
+						theLoai, giaSach, soLuongSach, indexSach);
 					break;
 				case 'd':
 					printf("Xoa thong tin sach.\n");
 					xoaSach(
-						ISBN, tenSach, tacGia, nhaXuatBan, namXuatBan, 
+						ISBN, tenSach, tacGia, nhaXuatBan, namXuatBan,
 						theLoai, giaSach, soLuongSach, &indexSach);
 					break;
 				case 'e':
 					printf("Tim kiem sach theo ISBN.\n");
 					timKiemSachTheoISBN(
 						ISBN, tenSach, tacGia, nhaXuatBan, namXuatBan,
-						 theLoai, giaSach, soLuongSach, indexSach);
+						theLoai, giaSach, soLuongSach, indexSach);
 					break;
 				case 'f':
 					printf("Tim kiem sach theo ten sach.\n");
 					timKiemSachTheoTenSach(
 						ISBN, tenSach, tacGia, nhaXuatBan, namXuatBan,
-						 theLoai, giaSach, soLuongSach, indexSach);
+						theLoai, giaSach, soLuongSach, indexSach);
 					break;
 				case 'g':
 					isBreak = true;
@@ -216,15 +217,19 @@ void showMenu()
 			printf("Lap phieu muon sach.\n");
 			phieuMuonSach(
 				maDocGiaMuonSach, maDocGia, ngayMuonSach, ngayTraSachDuKien,
-				ngayTraSachThucTe, tienPhat, ISBN_SachMuon, soLuongSachMuon, ISBN, soLuongSach,
-				indexDocGia, indexSach, &indexDocGia);
+				ngayTraSachThucTe, tienPhat, ISBN_SachMuon, soLuongSachMuon,
+				ISBN, soLuongSach, indexDocGia, indexSach, &indexThongTinMuonTraSach);
 			break;
 		}
 		case '4':
 		{
 			printf("\n---------------------------------\n");
 			printf("Lap phieu tra sach.\n");
-			
+			phieuTraSach(
+				maDocGiaMuonSach, ngayMuonSach, ngayTraSachDuKien,
+				ngayTraSachThucTe, tienPhat, ISBN_SachMuon,
+				soLuongSachMuon, ISBN, soLuongSach, giaSach,
+				indexSach, &indexThongTinMuonTraSach);
 			break;
 		}
 		case '5':
