@@ -33,7 +33,7 @@ char ngayMuonSach[MAX_DOC_GIA][MAX_STR];
 char ngayTraSachDuKien[MAX_DOC_GIA][MAX_STR];
 char ngayTraSachThucTe[MAX_DOC_GIA][MAX_STR];
 float tienPhat[MAX_DOC_GIA];
-int soLuongSachMuon[];
+int soLuongSachMuon[10];
 int ISBN_SachMuon[MAX_DOC_GIA][10]; // mỗi đọc giả được mượn tối đa 10 cuốn khác nhau.
 
 void hienThiPoster()
@@ -224,9 +224,7 @@ void showMenu()
 		{
 			printf("\n---------------------------------\n");
 			printf("Lap phieu tra sach.\n");
-			//		int maDocGia;long ISBN[] = { 1,2,4 };
-			//		TraSach(phieumuon, numberOfPhieumuon, maDocGia, ISBN, numOfIsbn, arrBooks, m);
-			//		break;
+			
 			break;
 		}
 		case '5':
