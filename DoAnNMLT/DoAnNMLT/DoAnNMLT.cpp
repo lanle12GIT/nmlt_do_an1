@@ -257,7 +257,7 @@ void showMenu()
 				break;
 			case 'b':
 				printf("Thong ke so luong sach theo the loai.");
-
+				thongKeSoLuongSachTheoTheLoai( theLoai,  soLuongSach, indexSach);
 				break;
 			case 'c':
 				printf("Thong ke so luong doc gia.");

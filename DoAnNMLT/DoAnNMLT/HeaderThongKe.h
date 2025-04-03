@@ -4,3 +4,4 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 void thongKeSoLuongSachTrongThuVien(int ISBN[], int soLuongSach[], int indexSach);
+void thongKeSoLuongSachTheoTheLoai(char theLoai[][MAX_STR], int soLuongSach[], int indexSach);
