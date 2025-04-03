@@ -97,9 +97,8 @@ void hienThiPhieuMuonTraSach(
     char ngayTraSachDuKien[][MAX_STR],
     char ngayTraSachThucTe[][MAX_STR],
     float tienPhat[],
-    int ISBN_SachMuon[][10], int soLuongSachMuon[], int indexThongTinMuonTraSach,
-    bool isPhieuMuon
-)
+    int ISBN_SachMuon[][10], int soLuongSachMuon[], int indexThongTinMuonTraSach
+    )
 {
     printf("\n *********************************************************************************\n");
     printf(" |                                                                               |\n");
@@ -220,7 +219,7 @@ void phieuMuonSach(
                     }
                 } while (!isTonTaiSach);
             }
-            (*indexThongTinMuonTraSach)++;
+            
         }
     }
     if (!isTonTai)
@@ -236,12 +235,12 @@ void phieuMuonSach(
         hienThiPhieuMuonTraSach(
             maDocGiaMuonSach, ngayMuonSach, ngayTraSachDuKien,
             ngayTraSachThucTe, tienPhat, ISBN_SachMuon, soLuongSachMuon,
-            *indexThongTinMuonTraSach, true);
+            *indexThongTinMuonTraSach);
 
         (*indexThongTinMuonTraSach)++;
     }
 }
-
+void xoaDocGiaMuonSach() {}
 void phieuTraSach(
     int maDocGiaMuonSach[],
     char ngayMuonSach[][MAX_STR],
@@ -256,6 +255,7 @@ void phieuTraSach(
 {
     int maDocGiaTraSach;
     bool isTonTai = false;
+    int ISBNprintf[1][10] = {0};
     do
     {
         printf(">>>>> Nhap ma doc gia muon tra sach: ");
@@ -286,6 +286,15 @@ void phieuTraSach(
                         printf("So sach tra khong hop le, khong the tra it hon 1 hoac lon hon so luong da muon\n");
                     }
                 } while (soLuongSachTra < 1 || soLuongSachTra > soLuongSachMuon[i]);
+
+                // copy mảng ISBN để in ra
+                
+                printf("ma ISBN: ");
+                for (int j = 0; j < soLuongSachMuon[i]; j++)
+                {
+                    ISBNprintf[1][j] = ISBN_SachMuon[i][j];
+                    printf("%d ", ISBNprintf[1][j]);
+                }
 
                 for (int j = 0; j < soLuongSachTra; j++) // muon 5 cuon sach
                 {
@@ -350,8 +359,54 @@ void phieuTraSach(
         }
 
         printf("====> Ma doc gia %d da tra sach thanh cong!!!", maDocGiaTraSach);
+
+        printf("\n *********************************************************************************\n");
+        printf(" |                                                                               |\n");
+        printf(" |                         PHIEU-TRA MUON SACH                                   |\n");
+        printf(" |                                                                               |\n");
+        printf(" |    Ma doc gia muon sach: %-50d   |\n", maDocGiaMuonSach[*indexThongTinMuonTraSach]);
+        printf(" |    Ngay muon sach:       %-50s   |\n", ngayMuonSach[*indexThongTinMuonTraSach]);
+        printf(" |    Ngay tra sach du kien:%-50s   |\n", ngayTraSachDuKien[*indexThongTinMuonTraSach]);
+        printf(" |    Ngay tra sach thuc te:%-50s   |\n", ngayTraSachThucTe[*indexThongTinMuonTraSach]);
+        printf(" |    Tien phat neu co:     %-50.2f   |\n", tienPhat[*indexThongTinMuonTraSach]);
+        printf(" |    Ma ISBN sach muon:                                                         |\n");
+        printf(" |");
+
+        for (int i = 0; i < soLuongSachMuon[*indexThongTinMuonTraSach]; i++)
+        {
+            if (ISBNprintf[1][i] != 0)
+            {
+                if (i == 5)
+                {
+                    printf("    |");
+                    printf("\n |");
+                }
+
+                printf("     %-10d", ISBN_SachMuon[1][i]);
+            }
+        }
+        if (soLuongSachMuon[*indexThongTinMuonTraSach] % 5 == 0)
+            printf("    |\n");
+        if (soLuongSachMuon[*indexThongTinMuonTraSach] % 5 == 1)
+            printf("                                                                |\n");
+        if (soLuongSachMuon[*indexThongTinMuonTraSach] % 5 == 2)
+            printf("                                                 |\n");
+        if (soLuongSachMuon[*indexThongTinMuonTraSach] % 5 == 3)
+            printf("                                  |\n");
+        if (soLuongSachMuon[*indexThongTinMuonTraSach] % 5 == 4)
+            printf("                   |\n");
+
+        printf(" |                                                                               |\n");
+        printf(" |                                                                               |\n");
+        printf(" |                                                                               |\n");
+        printf(" |                        *Vui long mang theo phieu khi tra sach                 |\n");
+        printf(" |                        *Tra sach tre hon ngay du kien se bi phat 5000/ngay    |\n");
+        printf(" |                        *Lam mat sach se den 200%% gia sach                     |\n");
+        printf(" |                                                                               |\n");
+        printf(" *********************************************************************************\n");
+
+        xoaDocGiaMuonSach();
         if (!isTonTai)
             printf("====> Ma doc gia %d nay khong dung, vui long kiem tra lai \n", maDocGiaTraSach);
     } while (!isTonTai);
-    
 }
