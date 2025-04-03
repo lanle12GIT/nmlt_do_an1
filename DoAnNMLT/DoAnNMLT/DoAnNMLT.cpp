@@ -59,7 +59,7 @@ void showMenu()
 	bool isFinshed = false;
 	do
 	{
-		printf("\n#################################\n");
+		printf("\n#################################");
 		printf("\n=== Menu Quan Li Thu Vien ===\n");
 		printf("1. Quan li doc gia\n");
 		printf("2. Quan li sach\n");
@@ -236,49 +236,58 @@ void showMenu()
 		}
 		case '5':
 		{
-			printf("\n---------------------------------\n");
-			printf("Ban chon Cac thong ke co ban.\n");
-			printf(">>>>> Nhap lua chon (a-f): \n");
-			printf("   a. Thong ke so luong sach trong thu vien\n");
-			printf("   b. Thong ke so luong sach theo the loai\n");
-			printf("   c. Thong ke so luong doc gia\n");
-			printf("   d. Thong ke so luong doc gia theo gioi tinh\n");
-			printf("   e. Thong ke so sach dang duoc muon\n");
-			printf("   f. Thong ke danh sach doc gia bi tre han\n");
-			printf("   g. Thoat\n");
-			char subChoice[2];
-			gets_s(subChoice, 2);
-			switch (subChoice[0])
+			bool isBreak = false;
+			do
 			{
 
-			case 'a':
-				printf("Thong ke so luong sach trong thu vien.");
-				thongKeSoLuongSachTrongThuVien(ISBN, soLuongSach, indexSach);
-				break;
-			case 'b':
-				printf("Thong ke so luong sach theo the loai.");
-				thongKeSoLuongSachTheoTheLoai( theLoai,  soLuongSach, indexSach);
-				break;
-			case 'c':
-				printf("Thong ke so luong doc gia.");
+				printf("\n---------------------------------\n");
+				printf("Ban chon Cac thong ke co ban.\n");
+				printf(">>>>> Nhap lua chon (a-f): \n");
+				printf("   a. Thong ke so luong sach trong thu vien\n");
+				printf("   b. Thong ke so luong sach theo the loai\n");
+				printf("   c. Thong ke so luong doc gia\n");
+				printf("   d. Thong ke so luong doc gia theo gioi tinh\n");
+				printf("   e. Thong ke so sach dang duoc muon\n");
+				printf("   f. Thong ke danh sach doc gia bi tre han\n");
+				printf("   g. Thoat\n");
+				char subChoice[2];
+				gets_s(subChoice, 2);
+				switch (subChoice[0])
+				{
 
-				break;
-			case 'd':
-				printf("Thong ke so luong doc gia theo gioi tinh.");
+				case 'a':
+					printf("Thong ke so luong sach trong thu vien.\n");
+					thongKeSoLuongSachTrongThuVien(ISBN, soLuongSach, indexSach);
+					break;
+				case 'b':
+					printf("Thong ke so luong sach theo the loai.\n");
+					thongKeSoLuongSachTheoTheLoai(theLoai, soLuongSach, indexSach);
+					break;
+				case 'c':
+					printf("Thong ke so luong doc gia.\n");
+					thongKeSoLuongDocGia(indexDocGia);
+					break;
+				case 'd':
+					printf("Thong ke so luong doc gia theo gioi tinh.\n");
+					thongKeSoLuongDocGiaTheoGioiTinh(gioiTinh, indexDocGia);
+					break;
+				case 'e':
+					printf("Thong ke so sach dang duoc muon.\n");
 
-				break;
-			case 'e':
-				printf("Thong ke so sach dang duoc muon.");
+					break;
+				case 'f':
+					printf("Thong ke danh sach doc gia bi tre han.\n");
 
-				break;
-			case 'f':
-				printf("Thong ke danh sach doc gia bi tre han.");
+					break;
+				case 'g':
+					isBreak = true;
+					break;
+				default:
+					printf("Lua chon khong hop le!");
+					break;
+				}
+			} while (!isBreak);
 
-				break;
-			default:
-				printf("Lua chon khong hop le!");
-				break;
-			}
 			break;
 		}
 		case '6':
@@ -402,6 +411,58 @@ int main()
 	strcpy_s(theLoai[4], "Cong Nghe");
 	giaSach[4] = 300000.0;
 	soLuongSach[4] = 12;
+
+	// Giả sử indexThongTinMuonTraSach = 5;
+	indexThongTinMuonTraSach = 5;
+
+	// Thông tin mượn trả cho độc giả ở index 0:
+	maDocGiaMuonSach[0] = 1001;
+	strcpy_s(ngayMuonSach[0], "10-04-2025");
+	strcpy_s(ngayTraSachDuKien[0], "20-04-2025");
+	strcpy_s(ngayTraSachThucTe[0], "19-04-2025");
+	tienPhat[0] = 0.0;
+	soLuongSachMuon[0] = 2;
+	ISBN_SachMuon[0][0] = 1111;
+	ISBN_SachMuon[0][1] = 3333;
+
+	// Thông tin mượn trả cho độc giả ở index 1:
+	maDocGiaMuonSach[1] = 1002;
+	strcpy_s(ngayMuonSach[1], "11-04-2025");
+	strcpy_s(ngayTraSachDuKien[1], "21-04-2025");
+	strcpy_s(ngayTraSachThucTe[1], "22-04-2025");
+	tienPhat[1] = 5000.0;
+	soLuongSachMuon[1] = 1;
+	ISBN_SachMuon[1][0] = 2222;
+
+	// Thông tin mượn trả cho độc giả ở index 2:
+	maDocGiaMuonSach[2] = 1003;
+	strcpy_s(ngayMuonSach[2], "12-04-2025");
+	strcpy_s(ngayTraSachDuKien[2], "22-04-2025");
+	strcpy_s(ngayTraSachThucTe[2], "22-04-2025");
+	tienPhat[2] = 0.0;
+	soLuongSachMuon[2] = 3;
+	ISBN_SachMuon[2][0] = 1111;
+	ISBN_SachMuon[2][1] = 4444;
+	ISBN_SachMuon[2][2] = 5555;
+
+	// Thông tin mượn trả cho độc giả ở index 3:
+	maDocGiaMuonSach[3] = 1004;
+	strcpy_s(ngayMuonSach[3], "13-04-2025");
+	strcpy_s(ngayTraSachDuKien[3], "23-04-2025");
+	strcpy_s(ngayTraSachThucTe[3], "23-04-2025");
+	tienPhat[3] = 0.0;
+	soLuongSachMuon[3] = 2;
+	ISBN_SachMuon[3][0] = 3333;
+	ISBN_SachMuon[3][1] = 4444;
+
+	// Thông tin mượn trả cho độc giả ở index 4:
+	maDocGiaMuonSach[4] = 1005;
+	strcpy_s(ngayMuonSach[4], "14-04-2025");
+	strcpy_s(ngayTraSachDuKien[4], "24-04-2025");
+	strcpy_s(ngayTraSachThucTe[4], "25-04-2025");
+	tienPhat[4] = 10000.0;
+	soLuongSachMuon[4] = 1;
+	ISBN_SachMuon[4][0] = 5555;
 
 	showMenu();
 	// tinhNgayngayTraSachDuKien("30-11-2024", ngayTraSachDuKien[0]);

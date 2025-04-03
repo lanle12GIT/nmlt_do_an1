@@ -220,6 +220,7 @@ void phieuMuonSach(
                     }
                 } while (!isTonTaiSach);
             }
+            (*indexThongTinMuonTraSach)++;
         }
     }
     if (!isTonTai)
@@ -352,4 +353,5 @@ void phieuTraSach(
         if (!isTonTai)
             printf("====> Ma doc gia %d nay khong dung, vui long kiem tra lai \n", maDocGiaTraSach);
     } while (!isTonTai);
+    
 }

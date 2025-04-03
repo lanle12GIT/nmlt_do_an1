@@ -1,0 +1,29 @@
+Trường dữ liệu,0,1,2,3,4
+Mã độc giả,1001,1002,1003,1004,1005
+Họ tên,Nguyen Van A,Tran Thi B,Le Van C,Pham Thi D,Hoang Van E
+CMND,123456789,987654321,456789123,321654987,789123456
+Ngày sinh,01-01-1990,02-02-1992,03-03-1993,04-04-1994,05-05-1995
+Giới tính,Nam,Nu,Nam,Nu,Nam
+Email,nguyenvana@gmail.com,tranthib@gmail.com,levanc@gmail.com,phamthid@gmail.com,hoangvane@gmail.com
+Địa chỉ,Ha Noi,Hai Phong,Da Nang,Ho Chi Minh,Can Tho
+Ngày mở thẻ,01-01-2020,02-02-2021,03-03-2022,04-04-2023,05-05-2024
+Ngày kết thúc thẻ,01-01-2024,02-02-2025,03-03-2026,04-04-2027,05-05-2028
+
+
+Trường dữ liệu,0,1,2,3,4
+ISBN,1111,2222,3333,4444,5555
+Tên sách,Lap Trinh C++,Lap Trinh Java,Lap Trinh Python,Thuat Toan,Co So Du Lieu
+Tác giả,Nguyen Van A,Tran Thi B,Le Van C,Pham Thi D,Hoang Van E
+Nhà xuất bản,NXB Tre,NXB Giao Duc,NXB Kim Dong,NXB Tre,NXB Giao Duc
+Năm xuất bản,2020,2021,2019,2018,2022
+Thể loại,Lap Trinh,Lap Trinh,Lap Trinh,Khoa Hoc,Cong Nghe
+Giá sách,150000.0,200000.0,180000.0,250000.0,300000.0
+Số lượng sách,10,15,8,5,12
+
+
+STT,Mã độc giả mượn,Ngày mượn sách,Ngày trả dự kiến,Ngày trả thực tế,Tiền phạt,Số lượng sách mượn,ISBN sách mượn
+1,1001,10-04-2025,20-04-2025,19-04-2025,0.0,2,1111, 3333
+2,1002,11-04-2025,21-04-2025,22-04-2025,5000.0,1,2222
+3,1003,12-04-2025,22-04-2025,22-04-2025,0.0,3,1111, 4444, 5555
+4,1004,13-04-2025,23-04-2025,23-04-2025,0.0,2,3333, 4444
+5,1005,14-04-2025,24-04-2025,25-04-2025,10000.0,1,5555

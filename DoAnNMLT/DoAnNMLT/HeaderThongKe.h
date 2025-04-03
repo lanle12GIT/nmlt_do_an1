@@ -5,3 +5,5 @@
 
 void thongKeSoLuongSachTrongThuVien(int ISBN[], int soLuongSach[], int indexSach);
 void thongKeSoLuongSachTheoTheLoai(char theLoai[][MAX_STR], int soLuongSach[], int indexSach);
+void thongKeSoLuongDocGia(int indexDocGia);
+void thongKeSoLuongDocGiaTheoGioiTinh(char gioiTinh[][MAX_STR], int indexDocGia);
