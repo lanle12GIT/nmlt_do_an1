@@ -115,7 +115,7 @@ void hienThiPhieuMuonTraSach(
     char ngayTraSachThucTe[][MAX_STR],
     float tienPhat[],
     int ISBN_SachMuon[][10], char tenSachMuon[][10][MAX_STR],
-    char ghiChu[][10][MAX_STR], int soLuongSachMuon[], int indexThongTinMuonTraSach)
+    char ghiChu[][10][MAX_STR], int soLuongSachMuon[], int indexThongTinMuonTraSach, bool isTraSach)
 {
     printf("\n *********************************************************************************\n");
     printf(" |                                                                               |\n");
@@ -134,9 +134,13 @@ void hienThiPhieuMuonTraSach(
 
     for (int i = 0; i < soLuongSachMuon[indexThongTinMuonTraSach]; i++)
     {
-        if (ISBN_SachMuon[indexThongTinMuonTraSach][i] != 0)
+        if (ISBN_SachMuon[isTraSach ? 0 : indexThongTinMuonTraSach][i] != 0)
         {
-            printf(" |   | %-08d | %-25s | %-30s  |  |\n", ISBN_SachMuon[indexThongTinMuonTraSach][i], tenSachMuon[indexThongTinMuonTraSach][i], ghiChu[indexThongTinMuonTraSach][i]); // in tên và mã sách
+            printf(" |   | %-08d | %-25s | %-30s  |  |\n",
+                   ISBN_SachMuon[isTraSach ? 0 : indexThongTinMuonTraSach][i],
+                   tenSachMuon[indexThongTinMuonTraSach][i],
+                   ghiChu[indexThongTinMuonTraSach][i]); // in tên và mã sách
+
             printf(" |   --------------------------------------------------------------------------  |\n");
         }
     }
@@ -178,7 +182,7 @@ void phieuMuonSach(
         {
             printf("\n =====> Doc gia ma %d da muon sach, khong the lap phieu muon sach moi\n", maDocGiaMuonSach[i]);
             while (getchar() != '\n')
-            ;
+                ;
             return;
         }
     }
@@ -278,7 +282,7 @@ void phieuMuonSach(
         hienThiPhieuMuonTraSach(
             maDocGiaMuonSach, hoTenMuonSach, ngayMuonSach, ngayTraSachDuKien,
             ngayTraSachThucTe, tienPhat, ISBN_SachMuon, tenSachMuon, ghiChu, soLuongSachMuon,
-            *indexThongTinMuonTraSach);
+            *indexThongTinMuonTraSach,false); // in phiếu mượn sách
 
         (*indexThongTinMuonTraSach)++;
     }
@@ -381,7 +385,6 @@ void phieuTraSach(
             for (int j = 0; j < soLuongSachMuon[i]; j++)
             {
                 ISBNprintf[0][j] = ISBN_SachMuon[i][j];
-               
             }
 
             for (int j = 0; j < soLuongSachTra; j++) // trả theo số lượng sách đã nhâpp
@@ -454,7 +457,7 @@ void phieuTraSach(
         hienThiPhieuMuonTraSach(
             maDocGiaMuonSach, hoTenMuonSach, ngayMuonSach, ngayTraSachDuKien,
             ngayTraSachThucTe, tienPhat, ISBNprintf, tenSachMuon, ghiChu, soLuongSachMuon,
-            temp); // in phiếu sách ra
+            temp,true); // in phiếu sách ra
         // xóa độc giả đã trả sách
         xoaDocGiaMuonSach(
             maDocGiaMuonSach, hoTenMuonSach, tenSachMuon, ngayMuonSach,

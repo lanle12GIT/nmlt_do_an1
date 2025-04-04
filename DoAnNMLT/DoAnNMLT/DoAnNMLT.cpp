@@ -281,9 +281,11 @@ void showMenu()
 
 				case 'e':
 					printf("Thong ke so sach dang duoc muon.\n");
-
+					thongKeSoLuongSachDangMuon(
+						ISBN_SachMuon,indexThongTinMuonTraSach,soLuongSachMuon,
+						indexSach,ISBN,tenSach);
 					break;
-					
+
 				case 'f':
 					printf("Thong ke danh sach doc gia bi tre han.\n");
 					thongKeDocGiaTreHan(

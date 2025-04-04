@@ -89,31 +89,57 @@ void thongKeSoLuongDocGiaTheoGioiTinh(char gioiTinh[][MAX_STR], int indexDocGia)
     printf("+-------------------------+--------------------+\n");
 }
 
-// // Thống kê số lượng sách đang được mượn
-// void thongKeSoLuongSachDangMuon(
-//     int ISBN_SachMuon[][10],int indexThongTinMuonTraSach, int soLuongSachMuon[],
-//      int indexSach, int ISBN[], char tenSach[][MAX_STR]){
+// Thống kê số lượng sách đang được mượn trong thư viện
 
-//         printf("\n+-------------------------+--------------------+\n");
-//         int ISBNtemp[1000]={0};  // Mảng đánh dấu các thể loại đã được thống kê
-//     for (int  i = 0; i < indexThongTinMuonTraSach; i++)
-//     {
-//       for (int j = 0; j < soLuongSachMuon[i] ; j++)
-//       {
-//         for (int k = 0; i < indexSach; i++)
-//         {
-//             if ()
-//             {
-//                 /* code */
-//             }
+void thongKeSoLuongSachDangMuon(
+    int ISBN_SachMuon[][10],
+    int indexThongTinMuonTraSach,
+    int soLuongSachMuon[],
+    int indexSach,
+    int ISBN[],
+    char tenSach[][MAX_STR])
+{
+    // Mảng đếm số lượng sách mượn của từng cuốn trong thư viện
+    int demSach[1000]; // Khởi tạo mảng đếm với kích thước bằng số lượng sách trong thư viện
+    for (int i = 0; i < indexSach; i++) {
+        demSach[i] = 0;
+    }
 
-//         }
+    // Duyệt qua từng phiếu mượn sách để tính số lượng mượn cho từng cuốn
+    for (int i = 0; i < indexThongTinMuonTraSach; i++) {
+        int soSachMuon = soLuongSachMuon[i];
+        for (int j = 0; j < soLuongSachMuon[i]; j++) {
+            int ISBNtemp = ISBN_SachMuon[i][j];
+            // Tìm kiếm mã ISBN tương ứng trong danh sách thư viện
+            for (int k = 0; k < indexSach; k++) {
+                if (ISBN[k] == ISBNtemp) {
+                    demSach[k]++;
+                    break;
+                }
+            }
+        }
+    }
 
-//       }
+    // Tính tổng số sách đang được mượn
+    int totalBorrowed = 0;
 
-//     }
+    // In tiêu đề bảng thống kê
+    printf("Thong ke sach dang duoc muon:\n");
+    printf("-----------------------------------------------------------------\n");
+    printf("| %-10s | %-30s | %-15s |\n", "ISBN", "Ten Sach", "So luong muon");
+    printf("-----------------------------------------------------------------\n");
 
-// }
+    // Duyệt qua danh sách thư viện để in các sách có số lượng mượn > 0
+    for (int i = 0; i < indexSach; i++) {
+        if (demSach[i] > 0) {
+            printf("| %-10d | %-30s | %-15d |\n", ISBN[i], tenSach[i], demSach[i]);
+            totalBorrowed += demSach[i];
+        }
+    }
+    printf("-----------------------------------------------------------------\n");
+    printf("Tong so sach dang duoc muon: %d\n", totalBorrowed);
+}
+
 
 // Thống kê danh sách độc giả bị trễ hạn
 void thongKeDocGiaTreHan(int maDocGiaMuuonSach[], char hoTenMuonSach[][MAX_STR],
