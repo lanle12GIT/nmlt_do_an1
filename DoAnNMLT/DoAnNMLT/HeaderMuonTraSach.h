@@ -3,6 +3,8 @@
 // void tinhNgayngayTraSachDuKien(const char ngayMuonSach[], char ngayTraSachDuKien[]);
 void phieuMuonSach(
     int maDocGiaMuonSach[], int maDocGia[],
+    char hoTen[][MAX_STR], char ngayMoThe[][MAX_STR],
+    char ngayKetThucThe[][MAX_STR],
     char ngayMuonSach[][MAX_STR],
     char ngayTraSachDuKien[][MAX_STR],
     char ngayTraSachThucTe[][MAX_STR],
@@ -11,7 +13,7 @@ void phieuMuonSach(
     int ISBN[], int soLuongSach[],
     int indexDocGia, int indexSach,
     int *indexThongTinMuonTraSach);
-   
+
 void phieuTraSach(
     int maDocGiaMuonSach[],
     char ngayMuonSach[][MAX_STR],

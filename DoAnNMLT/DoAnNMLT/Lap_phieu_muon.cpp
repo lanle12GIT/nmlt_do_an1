@@ -39,7 +39,7 @@ void tinhNgayngayTraSachDuKien(const char ngayMuonSach[], char ngayTraSachDuKien
 
 int tinhSoNamNhuan(int nam)
 {
-    return nam / 4 - nam / 100 + nam / 400;
+    return (nam-1) / 4 - (nam -1)/ 100 + (nam-1) / 400;
 }
 
 // Hàm tính số ngày từ 01/01/0001 đến ngày 'ngay', 'thang', 'nam'
@@ -49,7 +49,7 @@ int tinhSoNgay(int ngay, int thang, int nam)
     int soNgayTrongThang[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
     // Tính tổng số ngày từ 01/01/0001 đến ngày cho trước
-    int soNgay = nam * 365 + ngay;
+    int soNgay = (nam-1) * 365 + ngay;
 
     // Thêm số ngày cho các tháng trước tháng hiện tại
     for (int i = 0; i < thang - 1; i++)
@@ -90,6 +90,24 @@ int tinhSoNgayTraTre(const char ngayTraSachDuKien[], const char ngayTraSachThucT
     }
     return ngayTre;
 }
+bool xetDieuKienNgay(const char ngayBD[], const char ngayKT[])
+{
+    int ngay1, thang1, nam1;
+    int ngay2, thang2, nam2;
+
+    sscanf_s(ngayBD, "%d-%d-%d", &ngay1, &thang1, &nam1); // Tách ngày, tháng, năm từ chuỗi
+    sscanf_s(ngayKT, "%d-%d-%d", &ngay2, &thang2, &nam2);
+
+    int soNgayBD = tinhSoNgay(ngay1, thang1, nam1);
+    int soNgayKT = tinhSoNgay(ngay2, thang2, nam2);
+
+  
+    if (soNgayBD > soNgayKT)
+    {
+       return false; // Ngày mượn sách không được lớn hơn ngày kết thúc thẻ
+    }
+    return true; // Ngày mượn sách hợp lệ
+}
 
 void hienThiPhieuMuonTraSach(
     int maDocGiaMuonSach[],
@@ -97,8 +115,7 @@ void hienThiPhieuMuonTraSach(
     char ngayTraSachDuKien[][MAX_STR],
     char ngayTraSachThucTe[][MAX_STR],
     float tienPhat[],
-    int ISBN_SachMuon[][10], int soLuongSachMuon[], int indexThongTinMuonTraSach
-    )
+    int ISBN_SachMuon[][10], int soLuongSachMuon[], int indexThongTinMuonTraSach)
 {
     printf("\n *********************************************************************************\n");
     printf(" |                                                                               |\n");
@@ -148,6 +165,8 @@ void hienThiPhieuMuonTraSach(
 
 void phieuMuonSach(
     int maDocGiaMuonSach[], int maDocGia[],
+    char hoTen[][MAX_STR], char ngayMoThe[][MAX_STR],
+    char ngayKetThucThe[][MAX_STR],
     char ngayMuonSach[][MAX_STR],
     char ngayTraSachDuKien[][MAX_STR],
     char ngayTraSachThucTe[][MAX_STR],
@@ -158,41 +177,71 @@ void phieuMuonSach(
     int *indexThongTinMuonTraSach)
 {
     int maDocGiatemp;
-    printf(">>>>> Nhap ma doc gia muon muon sach: ");
+    printf(">>>>> Nhap ma doc gia muon muon sach(vi du: 1001): "); // nhập mã độc giả cần mượn sách
     scanf_s("%d", &maDocGiatemp);
+    while (getchar() != '\n')
+        ;
+    // kiểm tra mã độc giả có trong danh sách đã mượn sách không
+    for (int i = 0; i < *indexThongTinMuonTraSach; i++)
+    {
+        if (maDocGiatemp == maDocGiaMuonSach[i])
+        {
+            printf("Doc gia ma %d da muon sach, khong the lap phieu muon sach moi\n", maDocGiaMuonSach[i]);
+            return;
+        }
+    }
 
     bool isTonTai = false;
     for (int i = 0; i < indexDocGia; i++)
     {
-        if (maDocGia[i] == maDocGiatemp)
+        if (maDocGia[i] == maDocGiatemp) // độc giả mượn sách phải có trong danh sách độc giả
         {
             isTonTai = true;
-            maDocGiaMuonSach[*indexThongTinMuonTraSach] = maDocGiatemp;
+            maDocGiaMuonSach[*indexThongTinMuonTraSach] = maDocGiatemp; // lưu mã độc giả vào danh sách mượn sách
 
-            printf(">>>>> Nhap ngay muon sach (dd-mm-yyyy): ");
-            while (getchar() != '\n')
-                ;
-            enterDateTime(ngayMuonSach[*indexThongTinMuonTraSach]);
+            do
+            {
+                printf(">>>>> Nhap ngay,thang,nam muon sach "); // nhập ngày mượn sách
+                while (getchar() != '\n')
+                    ;
+                enterDateTime(ngayMuonSach[*indexThongTinMuonTraSach]);
 
+                if (xetDieuKienNgay(ngayMoThe[i], ngayMuonSach[*indexThongTinMuonTraSach])==false         // ngày mượn sách phải lớn hơn hoặc bằng ngày mở thẻ
+                    || xetDieuKienNgay(ngayMuonSach[*indexThongTinMuonTraSach], ngayKetThucThe[i])==false) // và nhỏ hơn hoặc bằng ngày kết thúc thẻ
+
+                {
+                    printf("Thoi gian muon sach khong hop le, vui long kiem tra lai the doc gia cua ban\n");
+                }
+
+            } while (xetDieuKienNgay(ngayMoThe[i], ngayMuonSach[*indexThongTinMuonTraSach])==false || xetDieuKienNgay(ngayMuonSach[*indexThongTinMuonTraSach], ngayKetThucThe[i])==false);
+
+            // tính ngày trả sách dự kiến
+            // ngày trả sách dự kiến = ngày mượn + 7 ngày
             tinhNgayngayTraSachDuKien(ngayMuonSach[*indexThongTinMuonTraSach], ngayTraSachDuKien[*indexThongTinMuonTraSach]);
 
+            // khởi tạo ngày trả sách thực tế và tiền phạt nếu trả trễ
+            // ngày trả sách thực tế = 00-00-0000
+            // tiền phạt = 0
             strcpy_s(ngayTraSachThucTe[*indexThongTinMuonTraSach], "00-00-0000");
             tienPhat[*indexThongTinMuonTraSach] = 0;
+
+            // nhập số lượng sách mượn
             int soSachMuon;
             do
             {
 
-                printf("\n>>>>> Nhap so sach muon muon:\n");
+                printf("\n>>>>> Nhap so sach muon muon: ");
                 scanf_s("%d", &soSachMuon);
                 while (getchar() != '\n')
                     ;
-                if (soSachMuon < 1 || soSachMuon > 10)
+                if (soSachMuon < 1 || soSachMuon > 10) // không được mượn ít hơn 1 hoặc nhiều hơn 10 cuốn sách
                 {
                     printf("So sach muon khong hop le, khong the muon it hon 1 hoac lon hon 10 cuon");
                 }
             } while (soSachMuon < 1 || soSachMuon > 10);
             soLuongSachMuon[*indexThongTinMuonTraSach] = soSachMuon;
 
+            // nhập mã ISBN của sách
             for (int soSach = 0; soSach < soSachMuon; soSach++)
             {
                 int ISBNtemp;
@@ -206,11 +255,11 @@ void phieuMuonSach(
 
                     for (int j = 0; j < indexSach; j++)
                     {
-                        if (ISBN[j] == ISBNtemp)
+                        if (ISBN[j] == ISBNtemp) // kiểm tra mã ISBN có trong thư viện không
                         {
                             isTonTaiSach = true;
-                            ISBN_SachMuon[*indexThongTinMuonTraSach][soSach] = ISBNtemp;
-                            soLuongSach[j]--;
+                            ISBN_SachMuon[*indexThongTinMuonTraSach][soSach] = ISBNtemp; // lưu mã ISBN vào danh sách mượn sách
+                            soLuongSach[j]--;                                            // trừ số lượng sách trong thư viện đi 1 cuốn
                         }
                     }
                     if (!isTonTaiSach)
@@ -219,7 +268,6 @@ void phieuMuonSach(
                     }
                 } while (!isTonTaiSach);
             }
-            
         }
     }
     if (!isTonTai)
@@ -240,7 +288,10 @@ void phieuMuonSach(
         (*indexThongTinMuonTraSach)++;
     }
 }
+
+// hàm xóa độc giả đã trả sách
 void xoaDocGiaMuonSach() {}
+
 void phieuTraSach(
     int maDocGiaMuonSach[],
     char ngayMuonSach[][MAX_STR],
@@ -256,49 +307,56 @@ void phieuTraSach(
     int maDocGiaTraSach;
     bool isTonTai = false;
     int ISBNprintf[1][10] = {0};
+
     do
     {
-        printf(">>>>> Nhap ma doc gia muon tra sach: ");
+        printf(">>>>> Nhap ma doc gia muon tra sach( vi du: 1001): "); // nhập mã độc giả
         scanf_s("%d", &maDocGiaTraSach);
         while (getchar() != '\n')
             ;
 
-        for (int i = 0; i < *indexThongTinMuonTraSach; i++)
+        for (int i = 0; i < *indexThongTinMuonTraSach; i++) // tìm mã đọc giả muốn trả trong danh sách độc giả mượn sách
         {
             if (maDocGiaMuonSach[i] == maDocGiaTraSach)
             {
                 isTonTai = true;
-                printf(">>>>> Nhap ngay tra thuc te: ");
-                enterDateTime(ngayTraSachThucTe[i]);
-                int result = tinhSoNgayTraTre(ngayTraSachDuKien[i], ngayTraSachThucTe[i]);
-                printf(" so ngay tra sach tre : %d * 5000", result);
-                tienPhat[i] = (float)result * 5000;
+                do
+                {
+                    printf(">>>>> Nhap ngay tra thuc te: "); // nếu có đoc giả thì nhập ngày trả thực tế
+                    enterDateTime(ngayTraSachThucTe[i]);
+                    if (xetDieuKienNgay(ngayMuonSach[i], ngayTraSachThucTe[i])==false) // ngày trả phải sau ngày mượn
+                    {
+                        printf("Thoi gian tra sach khong hop le, vui long kiem tra lai\n");
+                    }
 
-                int soLuongSachTra;
+                } while (xetDieuKienNgay(ngayMuonSach[i], ngayTraSachThucTe[i])==false);
+
+                int result = tinhSoNgayTraTre(ngayTraSachDuKien[i], ngayTraSachThucTe[i]); // tính ngày trả trễ
+                printf("so ngay tra sach tre : %d * 5000", result);
+                tienPhat[i] = (float)result * 5000; // trả trễ 5000/ngày
+
+                int soLuongSachTra; // số lượng sách trả
                 do
                 {
                     printf("\n>>>>> Nhap so sach tra:\n");
                     scanf_s("%d", &soLuongSachTra);
                     while (getchar() != '\n')
                         ;
-                    if (soLuongSachTra < 1 || soLuongSachTra > soLuongSachMuon[i])
+                    if (soLuongSachTra < 1 || soLuongSachTra > soLuongSachMuon[i]) // số lượng trả phải từ 1 đến số lượng mượn tại i
                     {
                         printf("So sach tra khong hop le, khong the tra it hon 1 hoac lon hon so luong da muon\n");
                     }
                 } while (soLuongSachTra < 1 || soLuongSachTra > soLuongSachMuon[i]);
 
                 // copy mảng ISBN để in ra
-                
-                printf("ma ISBN: ");
                 for (int j = 0; j < soLuongSachMuon[i]; j++)
                 {
-                    ISBNprintf[1][j] = ISBN_SachMuon[i][j];
-                    printf("%d ", ISBNprintf[1][j]);
+                    ISBNprintf[0][j] = ISBN_SachMuon[i][j];
                 }
 
-                for (int j = 0; j < soLuongSachTra; j++) // muon 5 cuon sach
+                for (int j = 0; j < soLuongSachTra; j++) // trả theo số lượng sách đã nhâpp
                 {
-                    int ISBNtemp;
+                    int ISBNtemp; // mã sách trả thực tế
 
                     printf(">>>>> Nhap ma ISBN cua sach muon tra: ");
                     scanf_s("%d", &ISBNtemp);
@@ -306,18 +364,18 @@ void phieuTraSach(
                         ;
 
                     bool isTonTaiSach = false;
-                    for (int k = 0; k < soLuongSachMuon[i]; k++)
+                    for (int k = 0; k < soLuongSachMuon[i]; k++) // kiểm tra mã sách trả có nằm trong danh sách mượn không
                     {
                         isTonTaiSach = false;
                         if (ISBN_SachMuon[i][k] == ISBNtemp)
                         {
                             isTonTaiSach = true;
-                            ISBN_SachMuon[i][k] = 0;
+                            ISBN_SachMuon[i][k] = 0; // xét bằng 0 là đã trả sách
                             for (int l = 0; l < indexSach; l++)
                             {
                                 if (ISBN[l] == ISBNtemp)
                                 {
-                                    soLuongSach[l]++;
+                                    soLuongSach[l]++; // tăng số lượng sách lên 1 trong thư viện
                                     break;
                                 }
                             }
@@ -335,19 +393,19 @@ void phieuTraSach(
 
                 // Kiểm tra nếu vẫn còn sách chưa trả
 
-                for (int k = 0; k < soLuongSachMuon[i]; k++)
+                for (int k = 0; k < soLuongSachMuon[i]; k++) // kiểm tra trên danh sách sách đã mượn
                 {
                     float tienDenSach = 0;
-                    if (ISBN_SachMuon[i][k] != 0)
+                    if (ISBN_SachMuon[i][k] != 0) // vì không trả nên số mã ISBN này khác 0
                     {
 
                         for (int l = 0; l < indexSach; l++)
                         {
-                            if (ISBN[l] == ISBN_SachMuon[i][k])
+                            if (ISBN[l] == ISBN_SachMuon[i][k]) // tìm mã sách không trả
                             {
-                                printf("\t ====> Ban khong tra/ lam mat sach nay se bi phat 200% gia tien\n");
+                                printf("\t ====> Ban khong tra sach nay :\n");
                                 tienDenSach = giaSach[l] * 2;
-                                printf("\t Ma ISBN cua sach bi mat: %d, gia sach = %0.2f , tien den sach = %0.2f \n", ISBN_SachMuon[i][k], giaSach[l], tienDenSach);
+                                printf("\t Ma ISBN: %d, gia = %0.2f , tien den = %0.2f (200%% gia tien)\n", ISBN_SachMuon[i][k], giaSach[l], tienDenSach);
                                 tienPhat[i] += tienDenSach;
                                 break;
                             }

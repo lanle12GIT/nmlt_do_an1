@@ -7,7 +7,7 @@
     int ngay, thang, nam;
 
     while (1) {
-        printf("\n>>>>>Nhap ngay, thang, nam voi format: dd-mm-yyyy. vi du: 29-03-2025\n");
+        printf("voi format: dd-mm-yyyy. vi du: 29-03-2025\n");
         if (scanf_s("%d-%d-%d", &ngay, &thang, &nam) == 3) {
             while (getchar() != '\n');
         }

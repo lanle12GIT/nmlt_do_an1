@@ -218,7 +218,7 @@ void showMenu()
 			printf("\n---------------------------------\n");
 			printf("Lap phieu muon sach.\n");
 			phieuMuonSach(
-				maDocGiaMuonSach, maDocGia, ngayMuonSach, ngayTraSachDuKien,
+				maDocGiaMuonSach, maDocGia, hoTen, ngayMoThe,ngayKetThucThe, ngayMuonSach, ngayTraSachDuKien,
 				ngayTraSachThucTe, tienPhat, ISBN_SachMuon, soLuongSachMuon,
 				ISBN, soLuongSach, indexDocGia, indexSach, &indexThongTinMuonTraSach);
 			break;
@@ -323,8 +323,8 @@ int main()
 	strcpy_s(gioiTinh[0], "Nam");
 	strcpy_s(email[0], "nguyenvana@gmail.com");
 	strcpy_s(diaChi[0], "Ha Noi");
-	strcpy_s(ngayMoThe[0], "01-01-2020");
-	strcpy_s(ngayKetThucThe[0], "01-01-2024");
+	strcpy_s(ngayMoThe[0], "01-01-2022");
+	strcpy_s(ngayKetThucThe[0], "01-01-2026");
 
 	maDocGia[1] = 1002;
 	strcpy_s(hoTen[1], "Tran Thi B");
@@ -333,8 +333,8 @@ int main()
 	strcpy_s(gioiTinh[1], "Nu");
 	strcpy_s(email[1], "tranthib@gmail.com");
 	strcpy_s(diaChi[1], "Hai Phong");
-	strcpy_s(ngayMoThe[1], "02-02-2021");
-	strcpy_s(ngayKetThucThe[1], "02-02-2025");
+	strcpy_s(ngayMoThe[1], "02-02-2023");
+	strcpy_s(ngayKetThucThe[1], "02-02-2027");
 
 	maDocGia[2] = 1003;
 	strcpy_s(hoTen[2], "Le Van C");
@@ -413,13 +413,13 @@ int main()
 	soLuongSach[4] = 12;
 
 	// Giả sử indexThongTinMuonTraSach = 5;
-	indexThongTinMuonTraSach = 5;
+	indexThongTinMuonTraSach = 3;
 
 	// Thông tin mượn trả cho độc giả ở index 0:
 	maDocGiaMuonSach[0] = 1001;
 	strcpy_s(ngayMuonSach[0], "10-04-2025");
-	strcpy_s(ngayTraSachDuKien[0], "20-04-2025");
-	strcpy_s(ngayTraSachThucTe[0], "19-04-2025");
+	strcpy_s(ngayTraSachDuKien[0], "17-04-2025");
+	strcpy_s(ngayTraSachThucTe[0], "00-00-0000");
 	tienPhat[0] = 0.0;
 	soLuongSachMuon[0] = 2;
 	ISBN_SachMuon[0][0] = 1111;
@@ -428,44 +428,26 @@ int main()
 	// Thông tin mượn trả cho độc giả ở index 1:
 	maDocGiaMuonSach[1] = 1002;
 	strcpy_s(ngayMuonSach[1], "11-04-2025");
-	strcpy_s(ngayTraSachDuKien[1], "21-04-2025");
-	strcpy_s(ngayTraSachThucTe[1], "22-04-2025");
-	tienPhat[1] = 5000.0;
+	strcpy_s(ngayTraSachDuKien[1], "18-04-2025");
+	strcpy_s(ngayTraSachThucTe[1], "00-00-0000");
+	tienPhat[1] = 0.0;
 	soLuongSachMuon[1] = 1;
 	ISBN_SachMuon[1][0] = 2222;
 
 	// Thông tin mượn trả cho độc giả ở index 2:
 	maDocGiaMuonSach[2] = 1003;
 	strcpy_s(ngayMuonSach[2], "12-04-2025");
-	strcpy_s(ngayTraSachDuKien[2], "22-04-2025");
-	strcpy_s(ngayTraSachThucTe[2], "22-04-2025");
+	strcpy_s(ngayTraSachDuKien[2], "19-04-2025");
+	strcpy_s(ngayTraSachThucTe[2], "00-00-0000");
 	tienPhat[2] = 0.0;
 	soLuongSachMuon[2] = 3;
 	ISBN_SachMuon[2][0] = 1111;
 	ISBN_SachMuon[2][1] = 4444;
 	ISBN_SachMuon[2][2] = 5555;
 
-	// Thông tin mượn trả cho độc giả ở index 3:
-	maDocGiaMuonSach[3] = 1004;
-	strcpy_s(ngayMuonSach[3], "13-04-2025");
-	strcpy_s(ngayTraSachDuKien[3], "23-04-2025");
-	strcpy_s(ngayTraSachThucTe[3], "23-04-2025");
-	tienPhat[3] = 0.0;
-	soLuongSachMuon[3] = 2;
-	ISBN_SachMuon[3][0] = 3333;
-	ISBN_SachMuon[3][1] = 4444;
-
-	// Thông tin mượn trả cho độc giả ở index 4:
-	maDocGiaMuonSach[4] = 1005;
-	strcpy_s(ngayMuonSach[4], "14-04-2025");
-	strcpy_s(ngayTraSachDuKien[4], "24-04-2025");
-	strcpy_s(ngayTraSachThucTe[4], "25-04-2025");
-	tienPhat[4] = 10000.0;
-	soLuongSachMuon[4] = 1;
-	ISBN_SachMuon[4][0] = 5555;
-
+	
 	showMenu();
-	// tinhNgayngayTraSachDuKien("30-11-2024", ngayTraSachDuKien[0]);
+	
 
 	return 0;
 }
