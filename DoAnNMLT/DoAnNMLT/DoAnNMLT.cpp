@@ -31,12 +31,15 @@ int soLuongSach[MAX_SACH];
 // Các mảng lưu trữ thông tin mượn trả sách
 int indexThongTinMuonTraSach = 0;
 int maDocGiaMuonSach[MAX_DOC_GIA];
+char hoTenMuonSach[MAX_DOC_GIA][MAX_STR];
+char tenSachMuon[MAX_DOC_GIA][10][MAX_STR];
 char ngayMuonSach[MAX_DOC_GIA][MAX_STR];
 char ngayTraSachDuKien[MAX_DOC_GIA][MAX_STR];
 char ngayTraSachThucTe[MAX_DOC_GIA][MAX_STR];
 float tienPhat[MAX_DOC_GIA];
 int soLuongSachMuon[10];
 int ISBN_SachMuon[MAX_DOC_GIA][10]; // mỗi đọc giả được mượn tối đa 10 cuốn khác nhau.
+char ghiChu[MAX_DOC_GIA][10][MAX_STR]={""}; // ghi trạng thái của sách đã mượn
 
 void hienThiPoster()
 {
@@ -218,9 +221,10 @@ void showMenu()
 			printf("\n---------------------------------\n");
 			printf("Lap phieu muon sach.\n");
 			phieuMuonSach(
-				maDocGiaMuonSach, maDocGia, hoTen, ngayMoThe,ngayKetThucThe, ngayMuonSach, ngayTraSachDuKien,
+				maDocGiaMuonSach, maDocGia, hoTen, hoTenMuonSach, tenSachMuon,tenSach, 
+				ngayMoThe, ngayKetThucThe, ngayMuonSach, ngayTraSachDuKien,
 				ngayTraSachThucTe, tienPhat, ISBN_SachMuon, soLuongSachMuon,
-				ISBN, soLuongSach, indexDocGia, indexSach, &indexThongTinMuonTraSach);
+				ISBN, soLuongSach, indexDocGia, indexSach,ghiChu, &indexThongTinMuonTraSach);
 			break;
 		}
 		case '4':
@@ -228,10 +232,10 @@ void showMenu()
 			printf("\n---------------------------------\n");
 			printf("Lap phieu tra sach.\n");
 			phieuTraSach(
-				maDocGiaMuonSach, ngayMuonSach, ngayTraSachDuKien,
-				ngayTraSachThucTe, tienPhat, ISBN_SachMuon,
+				maDocGiaMuonSach,hoTenMuonSach, ngayMuonSach, ngayTraSachDuKien,
+				ngayTraSachThucTe, tienPhat, ISBN_SachMuon,tenSachMuon,
 				soLuongSachMuon, ISBN, soLuongSach, giaSach,
-				indexSach, &indexThongTinMuonTraSach);
+				indexSach, ghiChu, &indexThongTinMuonTraSach);
 			break;
 		}
 		case '5':
@@ -417,37 +421,44 @@ int main()
 
 	// Thông tin mượn trả cho độc giả ở index 0:
 	maDocGiaMuonSach[0] = 1001;
+	strcpy_s(hoTenMuonSach[0], "Nguyen Van A");
 	strcpy_s(ngayMuonSach[0], "10-04-2025");
 	strcpy_s(ngayTraSachDuKien[0], "17-04-2025");
 	strcpy_s(ngayTraSachThucTe[0], "00-00-0000");
 	tienPhat[0] = 0.0;
 	soLuongSachMuon[0] = 2;
 	ISBN_SachMuon[0][0] = 1111;
+	strcpy_s(tenSachMuon[0][0],MAX_STR, "Lap Trinh C++");
 	ISBN_SachMuon[0][1] = 3333;
+	strcpy_s(tenSachMuon[0][1],MAX_STR, "Lap Trinh Python");
 
 	// Thông tin mượn trả cho độc giả ở index 1:
 	maDocGiaMuonSach[1] = 1002;
+	strcpy_s(hoTenMuonSach[1], "Tran Thi B");
 	strcpy_s(ngayMuonSach[1], "11-04-2025");
 	strcpy_s(ngayTraSachDuKien[1], "18-04-2025");
 	strcpy_s(ngayTraSachThucTe[1], "00-00-0000");
 	tienPhat[1] = 0.0;
 	soLuongSachMuon[1] = 1;
 	ISBN_SachMuon[1][0] = 2222;
+	strcpy_s(tenSachMuon[1][0],MAX_STR, "Lap Trinh Java");
 
 	// Thông tin mượn trả cho độc giả ở index 2:
 	maDocGiaMuonSach[2] = 1003;
+	strcpy_s(hoTenMuonSach[2], "Le Van C");
 	strcpy_s(ngayMuonSach[2], "12-04-2025");
 	strcpy_s(ngayTraSachDuKien[2], "19-04-2025");
 	strcpy_s(ngayTraSachThucTe[2], "00-00-0000");
 	tienPhat[2] = 0.0;
 	soLuongSachMuon[2] = 3;
 	ISBN_SachMuon[2][0] = 1111;
+	strcpy_s(tenSachMuon[2][0],MAX_STR, "Lap Trinh C++");
 	ISBN_SachMuon[2][1] = 4444;
+	strcpy_s(tenSachMuon[2][1],MAX_STR, "Thuat Toan");
 	ISBN_SachMuon[2][2] = 5555;
+	strcpy_s(tenSachMuon[2][2],MAX_STR, "Co So Du Lieu");
 
-	
 	showMenu();
-	
 
 	return 0;
 }
