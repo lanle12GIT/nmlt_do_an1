@@ -78,7 +78,7 @@ void thongKeSoLuongDocGiaTheoGioiTinh(char gioiTinh[][MAX_STR], int indexDocGia)
             {
                 if (_stricmp(gioiTinh[i], gioiTinh[j]) == 0)
                 {
-                    tongSoLuong ++;
+                    tongSoLuong++;
                     daThongKe[j] = 1; // Đánh dấu thể loại đã được thống kê
                 }
             }
@@ -89,8 +89,58 @@ void thongKeSoLuongDocGiaTheoGioiTinh(char gioiTinh[][MAX_STR], int indexDocGia)
     printf("+-------------------------+--------------------+\n");
 }
 
-// Thống kê số lượng sách đang được mượn
-void thongKeSoLuongSachMuon(){
+// // Thống kê số lượng sách đang được mượn
+// void thongKeSoLuongSachDangMuon(
+//     int ISBN_SachMuon[][10],int indexThongTinMuonTraSach, int soLuongSachMuon[],
+//      int indexSach, int ISBN[], char tenSach[][MAX_STR]){
+
+//         printf("\n+-------------------------+--------------------+\n");
+//         int ISBNtemp[1000]={0};  // Mảng đánh dấu các thể loại đã được thống kê
+//     for (int  i = 0; i < indexThongTinMuonTraSach; i++)
+//     {
+//       for (int j = 0; j < soLuongSachMuon[i] ; j++)
+//       {
+//         for (int k = 0; i < indexSach; i++)
+//         {
+//             if ()
+//             {
+//                 /* code */
+//             }
+
+//         }
+
+//       }
+
+//     }
+
+// }
+
+// Thống kê danh sách độc giả bị trễ hạn
+void thongKeDocGiaTreHan(int maDocGiaMuuonSach[], char hoTenMuonSach[][MAX_STR],
+                         char ngayTraSachDuKien[][MAX_STR], int indexThongTinMuonTraSach, int soLuongSachMuon[])
+{
+    char ngayHienTai[MAX_STR];
+    printf(">>>>> Nhap ngay hien tai ");
+    enterDateTime(ngayHienTai); // nhập ngày hiện tại để so sánh với ngày trả sách thực tế
+
+    int tong = 0;
+
+    printf("\n ----------------------------------------------------------------------------\n");
+    printf(" | %-05s | %-23s | %-15s | %-15s | ", "Ma doc gia", "Doc gia tre han", "So sach muon", "so ngay tre han");
+    printf("\n ----------------------------------------------------------------------------\n");
+
+    for (int i = 0; i < indexThongTinMuonTraSach; i++)
+    {
+        if (xetDieuKienNgay(ngayTraSachDuKien[i], ngayHienTai)) // nếu ngày hiện tại lớn hơn ngày trả sách dự kiến của độc giả thì bị trễ hạn
+        {
+            int result = tinhSoNgayTraTre(ngayTraSachDuKien[i], ngayHienTai); // tính số ngày trễ hạn
+            tong ++;
+            printf(" | %-05d      | %-23s | %-15d | %-15d |", maDocGiaMuuonSach[i], hoTenMuonSach[i], soLuongSachMuon[i], result);
+            printf("\n ----------------------------------------------------------------------------\n");
+        }
+    }
+
+    printf(" %s  %d \n", "Tong doc gia tre han: ", tong);
     
 }
-
+    

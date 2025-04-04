@@ -12,7 +12,7 @@ void phieuMuonSach(
     float tienPhat[],
     int ISBN_SachMuon[][10], int soLuongSachMuon[],
     int ISBN[], int soLuongSach[],
-    int indexDocGia, int indexSach,char ghiChu[][10][MAX_STR],
+    int indexDocGia, int indexSach, char ghiChu[][10][MAX_STR],
     int *indexThongTinMuonTraSach);
 
 void phieuTraSach(
@@ -24,5 +24,7 @@ void phieuTraSach(
     int ISBN_SachMuon[][10], char tenSachMuon[][10][MAX_STR],
     int soLuongSachMuon[],
     int ISBN[], int soLuongSach[],
-    float giaSach[], int indexSach,char ghiChu[][10][MAX_STR],
+    float giaSach[], int indexSach, char ghiChu[][10][MAX_STR],
     int *indexThongTinMuonTraSach);
+bool xetDieuKienNgay(const char ngayBD[], const char ngayKT[]);
+int tinhSoNgayTraTre(const char ngayTraSachDuKien[], const char ngayTraSachThucTe[]);

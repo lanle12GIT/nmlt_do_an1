@@ -38,8 +38,8 @@ char ngayTraSachDuKien[MAX_DOC_GIA][MAX_STR];
 char ngayTraSachThucTe[MAX_DOC_GIA][MAX_STR];
 float tienPhat[MAX_DOC_GIA];
 int soLuongSachMuon[10];
-int ISBN_SachMuon[MAX_DOC_GIA][10]; // mỗi đọc giả được mượn tối đa 10 cuốn khác nhau.
-char ghiChu[MAX_DOC_GIA][10][MAX_STR]={""}; // ghi trạng thái của sách đã mượn
+int ISBN_SachMuon[MAX_DOC_GIA][10];			  // mỗi đọc giả được mượn tối đa 10 cuốn khác nhau.
+char ghiChu[MAX_DOC_GIA][10][MAX_STR] = {""}; // ghi trạng thái của sách đã mượn
 
 void hienThiPoster()
 {
@@ -221,10 +221,10 @@ void showMenu()
 			printf("\n---------------------------------\n");
 			printf("Lap phieu muon sach.\n");
 			phieuMuonSach(
-				maDocGiaMuonSach, maDocGia, hoTen, hoTenMuonSach, tenSachMuon,tenSach, 
+				maDocGiaMuonSach, maDocGia, hoTen, hoTenMuonSach, tenSachMuon, tenSach,
 				ngayMoThe, ngayKetThucThe, ngayMuonSach, ngayTraSachDuKien,
 				ngayTraSachThucTe, tienPhat, ISBN_SachMuon, soLuongSachMuon,
-				ISBN, soLuongSach, indexDocGia, indexSach,ghiChu, &indexThongTinMuonTraSach);
+				ISBN, soLuongSach, indexDocGia, indexSach, ghiChu, &indexThongTinMuonTraSach);
 			break;
 		}
 		case '4':
@@ -232,8 +232,8 @@ void showMenu()
 			printf("\n---------------------------------\n");
 			printf("Lap phieu tra sach.\n");
 			phieuTraSach(
-				maDocGiaMuonSach,hoTenMuonSach, ngayMuonSach, ngayTraSachDuKien,
-				ngayTraSachThucTe, tienPhat, ISBN_SachMuon,tenSachMuon,
+				maDocGiaMuonSach, hoTenMuonSach, ngayMuonSach, ngayTraSachDuKien,
+				ngayTraSachThucTe, tienPhat, ISBN_SachMuon, tenSachMuon,
 				soLuongSachMuon, ISBN, soLuongSach, giaSach,
 				indexSach, ghiChu, &indexThongTinMuonTraSach);
 			break;
@@ -263,26 +263,34 @@ void showMenu()
 					printf("Thong ke so luong sach trong thu vien.\n");
 					thongKeSoLuongSachTrongThuVien(ISBN, soLuongSach, indexSach);
 					break;
+
 				case 'b':
 					printf("Thong ke so luong sach theo the loai.\n");
 					thongKeSoLuongSachTheoTheLoai(theLoai, soLuongSach, indexSach);
 					break;
+
 				case 'c':
 					printf("Thong ke so luong doc gia.\n");
 					thongKeSoLuongDocGia(indexDocGia);
 					break;
+
 				case 'd':
 					printf("Thong ke so luong doc gia theo gioi tinh.\n");
 					thongKeSoLuongDocGiaTheoGioiTinh(gioiTinh, indexDocGia);
 					break;
+
 				case 'e':
 					printf("Thong ke so sach dang duoc muon.\n");
 
 					break;
+					
 				case 'f':
 					printf("Thong ke danh sach doc gia bi tre han.\n");
-
+					thongKeDocGiaTreHan(
+						maDocGiaMuonSach, hoTenMuonSach,
+						ngayTraSachDuKien, indexThongTinMuonTraSach, soLuongSachMuon);
 					break;
+
 				case 'g':
 					isBreak = true;
 					break;
@@ -428,9 +436,9 @@ int main()
 	tienPhat[0] = 0.0;
 	soLuongSachMuon[0] = 2;
 	ISBN_SachMuon[0][0] = 1111;
-	strcpy_s(tenSachMuon[0][0],MAX_STR, "Lap Trinh C++");
+	strcpy_s(tenSachMuon[0][0], MAX_STR, "Lap Trinh C++");
 	ISBN_SachMuon[0][1] = 3333;
-	strcpy_s(tenSachMuon[0][1],MAX_STR, "Lap Trinh Python");
+	strcpy_s(tenSachMuon[0][1], MAX_STR, "Lap Trinh Python");
 
 	// Thông tin mượn trả cho độc giả ở index 1:
 	maDocGiaMuonSach[1] = 1002;
@@ -441,7 +449,7 @@ int main()
 	tienPhat[1] = 0.0;
 	soLuongSachMuon[1] = 1;
 	ISBN_SachMuon[1][0] = 2222;
-	strcpy_s(tenSachMuon[1][0],MAX_STR, "Lap Trinh Java");
+	strcpy_s(tenSachMuon[1][0], MAX_STR, "Lap Trinh Java");
 
 	// Thông tin mượn trả cho độc giả ở index 2:
 	maDocGiaMuonSach[2] = 1003;
@@ -452,11 +460,11 @@ int main()
 	tienPhat[2] = 0.0;
 	soLuongSachMuon[2] = 3;
 	ISBN_SachMuon[2][0] = 1111;
-	strcpy_s(tenSachMuon[2][0],MAX_STR, "Lap Trinh C++");
+	strcpy_s(tenSachMuon[2][0], MAX_STR, "Lap Trinh C++");
 	ISBN_SachMuon[2][1] = 4444;
-	strcpy_s(tenSachMuon[2][1],MAX_STR, "Thuat Toan");
+	strcpy_s(tenSachMuon[2][1], MAX_STR, "Thuat Toan");
 	ISBN_SachMuon[2][2] = 5555;
-	strcpy_s(tenSachMuon[2][2],MAX_STR, "Co So Du Lieu");
+	strcpy_s(tenSachMuon[2][2], MAX_STR, "Co So Du Lieu");
 
 	showMenu();
 

@@ -7,3 +7,5 @@ void thongKeSoLuongSachTrongThuVien(int ISBN[], int soLuongSach[], int indexSach
 void thongKeSoLuongSachTheoTheLoai(char theLoai[][MAX_STR], int soLuongSach[], int indexSach);
 void thongKeSoLuongDocGia(int indexDocGia);
 void thongKeSoLuongDocGiaTheoGioiTinh(char gioiTinh[][MAX_STR], int indexDocGia);
+void thongKeDocGiaTreHan(int maDocGiaMuuonSach[], char hoTenMuonSach[][MAX_STR],
+    char ngayTraSachDuKien[][MAX_STR], int indexThongTinMuonTraSach, int soLuongSachMuon[]);
