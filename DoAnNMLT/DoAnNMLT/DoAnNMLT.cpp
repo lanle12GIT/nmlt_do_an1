@@ -5,42 +5,45 @@
 #include "HeaderMuonTraSach.h"
 #include "HeaderThongKe.h"
 
+// Biến toàn cục lưu số lượng độc giả hiện tại
 int indexDocGia = 0;
-// Các mảng lưu trữ thông tin độc giả
-int maDocGia[MAX_DOC_GIA];
-char hoTen[MAX_DOC_GIA][MAX_STR];
-char cmnd[MAX_DOC_GIA][MAX_STR];
-char ngayThangNamSinh[MAX_DOC_GIA][MAX_STR];
-char gioiTinh[MAX_DOC_GIA][MAX_STR];
-char email[MAX_DOC_GIA][MAX_STR];
-char diaChi[MAX_DOC_GIA][MAX_STR];
-char ngayMoThe[MAX_DOC_GIA][MAX_STR];
-char ngayKetThucThe[MAX_DOC_GIA][MAX_STR];
+int maDocGia[MAX_DOC_GIA];					 // Mã độc giả
+char hoTen[MAX_DOC_GIA][MAX_STR];			 // Họ tên độc giả
+char cmnd[MAX_DOC_GIA][MAX_STR];			 // Số CMND
+char ngayThangNamSinh[MAX_DOC_GIA][MAX_STR]; // Ngày sinh
+char gioiTinh[MAX_DOC_GIA][MAX_STR];		 // Giới tính
+char email[MAX_DOC_GIA][MAX_STR];			 // Email
+char diaChi[MAX_DOC_GIA][MAX_STR];			 // Địa chỉ
+char ngayMoThe[MAX_DOC_GIA][MAX_STR];		 // Ngày mở thẻ
+char ngayKetThucThe[MAX_DOC_GIA][MAX_STR];	 // Ngày kết thúc thẻ
 
+// Biến toàn cục lưu số lượng sách hiện tại
 int indexSach = 0;
+
 // Các mảng lưu trữ thông tin sách
-int ISBN[MAX_SACH];
-char tenSach[MAX_SACH][MAX_STR];
-char tacGia[MAX_SACH][MAX_STR];
-char nhaXuatBan[MAX_SACH][MAX_STR];
-int namXuatBan[MAX_SACH];
-char theLoai[MAX_SACH][MAX_STR];
-float giaSach[MAX_SACH];
-int soLuongSach[MAX_SACH];
+int ISBN[MAX_SACH];					// Mã ISBN
+char tenSach[MAX_SACH][MAX_STR];	// Tên sách
+char tacGia[MAX_SACH][MAX_STR];		// Tác giả
+char nhaXuatBan[MAX_SACH][MAX_STR]; // Nhà xuất bản
+int namXuatBan[MAX_SACH];			// Năm xuất bản
+char theLoai[MAX_SACH][MAX_STR];	// Thể loại
+float giaSach[MAX_SACH];			// Giá sách
+int soLuongSach[MAX_SACH];			// Số lượng sách
 
 // Các mảng lưu trữ thông tin mượn trả sách
-int indexThongTinMuonTraSach = 0;
-int maDocGiaMuonSach[MAX_DOC_GIA];
-char hoTenMuonSach[MAX_DOC_GIA][MAX_STR];
-char tenSachMuon[MAX_DOC_GIA][10][MAX_STR];
-char ngayMuonSach[MAX_DOC_GIA][MAX_STR];
-char ngayTraSachDuKien[MAX_DOC_GIA][MAX_STR];
-char ngayTraSachThucTe[MAX_DOC_GIA][MAX_STR];
-float tienPhat[MAX_DOC_GIA];
-int soLuongSachMuon[10];
-int ISBN_SachMuon[MAX_DOC_GIA][10];			  // mỗi đọc giả được mượn tối đa 10 cuốn khác nhau.
-char ghiChu[MAX_DOC_GIA][10][MAX_STR] = {""}; // ghi trạng thái của sách đã mượn
+int indexThongTinMuonTraSach = 0;			  // Số lượng phiếu mượn trả
+int maDocGiaMuonSach[MAX_DOC_GIA];			  // Mã độc giả mượn sách
+char hoTenMuonSach[MAX_DOC_GIA][MAX_STR];	  // Họ tên độc giả mượn
+char tenSachMuon[MAX_DOC_GIA][10][MAX_STR];	  // Tên các sách mượn (tối đa 10 cuốn/độc giả)
+char ngayMuonSach[MAX_DOC_GIA][MAX_STR];	  // Ngày mượn sách
+char ngayTraSachDuKien[MAX_DOC_GIA][MAX_STR]; // Ngày trả dự kiến
+char ngayTraSachThucTe[MAX_DOC_GIA][MAX_STR]; // Ngày trả thực tế
+float tienPhat[MAX_DOC_GIA];				  // Tiền phạt nếu có
+int soLuongSachMuon[10];					  // Số lượng sách mượn cho từng phiếu
+int ISBN_SachMuon[MAX_DOC_GIA][10];			  // ISBN các sách mượn, mỗi độc giả có tối đa 10 cuốn sách
+char ghiChu[MAX_DOC_GIA][10][MAX_STR] = {""}; // Ghi chú trạng thái sách đã mượn
 
+// Hàm hiển thị poster giới thiệu chương trình
 void hienThiPoster()
 {
 	printf("*****************************************************\n");
@@ -56,12 +59,12 @@ void hienThiPoster()
 	printf("\n\n");
 }
 
-// Hàm hiển thị menu
+// Hàm hiển thị menu chính và xử lý lựa chọn của người dùng
 void showMenu()
 {
 	bool isFinshed = false;
 	do
-	{
+	{ // Hiển thị menu chính
 		printf("\n#################################");
 		printf("\n=== Menu Quan Li Thu Vien ===\n");
 		printf("1. Quan li doc gia\n");
@@ -71,16 +74,16 @@ void showMenu()
 		printf("5. Cac thong ke co ban\n");
 		printf("6. Thoat\n");
 		printf(">>>>> Nhap lua chon cua ban: ");
-		char choice[2]; // Kích thước 10 ký tự (9 ký tự + 1 null terminator)
+		char choice[2]; // Kích thước 2 ký tự (1 ký tự + 1 null terminator)
 		gets_s(choice, 2);
 
 		switch (choice[0])
 		{
-		case '1':
+		case '1': // Quản lý độc giả
 		{
 			bool isBreak = false;
 			do
-			{
+			{ // Hiển thị menu con quản lý độc giả
 				printf("\n---------------------------------\n");
 				printf("------Quan li doc gia.-----\n");
 				printf(">>>>> Nhap lua chon (a-g): \n");
@@ -97,49 +100,49 @@ void showMenu()
 
 				switch (subChoice[0])
 				{
-				case 'a':
+				case 'a': // Xem danh sách độc giả
 					printf("Xem danh sach doc gia trong thu vien.\n");
 					hienThiTatCaDocGia(
 						indexDocGia, maDocGia, hoTen, cmnd,
 						ngayThangNamSinh, gioiTinh, email,
 						diaChi, ngayMoThe, ngayKetThucThe);
 					break;
-				case 'b':
+				case 'b': // Thêm độc giả mới
 					printf("Them doc gia.\n");
 					themDocGia(
 						maDocGia, hoTen, cmnd, ngayThangNamSinh,
 						gioiTinh, email, diaChi, ngayMoThe,
 						ngayKetThucThe, &indexDocGia);
 					break;
-				case 'c':
+				case 'c': // Chỉnh sửa thông tin độc giả
 					printf("Chinh sua thong tin mot doc gia.\n");
 					chinhSuaDocGia(
 						maDocGia, hoTen, cmnd, ngayThangNamSinh,
 						gioiTinh, email, diaChi, ngayMoThe,
 						ngayKetThucThe, indexDocGia);
 					break;
-				case 'd':
+				case 'd': // Xóa độc giả
 					printf("Xoa thong tin mot doc gia.\n");
 					xoaDocGia(
 						maDocGia, hoTen, cmnd, ngayThangNamSinh,
 						gioiTinh, email, diaChi, ngayMoThe,
 						ngayKetThucThe, &indexDocGia);
 					break;
-				case 'e':
+				case 'e': // Tìm kiếm độc giả theo CMND
 					printf("Tim kiem doc gia theo CMND.\n");
 					timKiemDocGiaTheoCMND(
 						maDocGia, hoTen, cmnd, ngayThangNamSinh,
 						gioiTinh, email, diaChi, ngayMoThe,
 						ngayKetThucThe, indexDocGia);
 					break;
-				case 'f':
+				case 'f': // Tìm kiếm độc giả theo họ tên
 					printf("Tim kiem doc gia theo ho ten.\n");
 					timKiemDocGiaTheoHoTen(
 						maDocGia, hoTen, cmnd, ngayThangNamSinh,
 						gioiTinh, email, diaChi, ngayMoThe,
 						ngayKetThucThe, indexDocGia);
 					break;
-				case 'g':
+				case 'g': // Thoát menu quản lý độc giả
 					isBreak = true;
 					break;
 				default:
@@ -149,12 +152,12 @@ void showMenu()
 			} while (!isBreak);
 			break;
 		}
-		case '2':
+		case '2': // Quản lý sách
 		{
 			bool isBreak = false;
 			do
 			{
-
+				// Hiển thị menu con quản lý sách
 				printf("\n---------------------------------\n");
 				printf("------Quan li sach.-----\n");
 				printf(">>>>> Nhap lua chon (a-f): \n");
@@ -170,43 +173,43 @@ void showMenu()
 				gets_s(choice, 2);
 				switch (choice[0])
 				{
-				case 'a':
+				case 'a':  // Xem danh sách sách
 					printf("Xem danh sach cac sach trong thu vien.\n");
 					hienThiTatCaSach(
 						ISBN, tenSach, tacGia, nhaXuatBan, namXuatBan,
 						theLoai, giaSach, soLuongSach, indexSach);
 					break;
-				case 'b':
+				case 'b': // Thêm sách mới
 					printf("Them sach.\n");
 					themSach(
 						ISBN, tenSach, tacGia, nhaXuatBan, namXuatBan,
 						theLoai, giaSach, soLuongSach, &indexSach);
 					break;
-				case 'c':
+				case 'c':  // Chỉnh sửa thông tin sách
 					printf("Chinh sua thong tin mot quyen sach.\n");
 					chinhSuaSach(
 						ISBN, tenSach, tacGia, nhaXuatBan, namXuatBan,
 						theLoai, giaSach, soLuongSach, indexSach);
 					break;
-				case 'd':
+				case 'd':    // Xóa sách
 					printf("Xoa thong tin sach.\n");
 					xoaSach(
 						ISBN, tenSach, tacGia, nhaXuatBan, namXuatBan,
 						theLoai, giaSach, soLuongSach, &indexSach);
 					break;
-				case 'e':
+				case 'e':  // Tìm kiếm sách theo ISBN
 					printf("Tim kiem sach theo ISBN.\n");
 					timKiemSachTheoISBN(
 						ISBN, tenSach, tacGia, nhaXuatBan, namXuatBan,
 						theLoai, giaSach, soLuongSach, indexSach);
 					break;
-				case 'f':
+				case 'f':    // Tìm kiếm sách theo tên sách
 					printf("Tim kiem sach theo ten sach.\n");
 					timKiemSachTheoTenSach(
 						ISBN, tenSach, tacGia, nhaXuatBan, namXuatBan,
 						theLoai, giaSach, soLuongSach, indexSach);
 					break;
-				case 'g':
+				case 'g':  // Thoát menu quản lý sách
 					isBreak = true;
 					break;
 				default:
@@ -216,7 +219,7 @@ void showMenu()
 			} while (!isBreak);
 			break;
 		}
-		case '3':
+		case '3':  // Lập phiếu mượn sách
 		{
 			printf("\n---------------------------------\n");
 			printf("Lap phieu muon sach.\n");
@@ -227,7 +230,7 @@ void showMenu()
 				ISBN, soLuongSach, indexDocGia, indexSach, ghiChu, &indexThongTinMuonTraSach);
 			break;
 		}
-		case '4':
+		case '4':  // Lập phiếu trả sách
 		{
 			printf("\n---------------------------------\n");
 			printf("Lap phieu tra sach.\n");
@@ -240,6 +243,7 @@ void showMenu()
 		}
 		case '5':
 		{
+			 // Thống kê cơ bản
 			bool isBreak = false;
 			do
 			{
@@ -258,42 +262,42 @@ void showMenu()
 				gets_s(subChoice, 2);
 				switch (subChoice[0])
 				{
-
-				case 'a':
+					
+				case 'a':   // Thống kê số lượng sách
 					printf("Thong ke so luong sach trong thu vien.\n");
 					thongKeSoLuongSachTrongThuVien(ISBN, soLuongSach, indexSach);
 					break;
 
-				case 'b':
+				case 'b':  // Thống kê sách theo thể loại
 					printf("Thong ke so luong sach theo the loai.\n");
 					thongKeSoLuongSachTheoTheLoai(theLoai, soLuongSach, indexSach);
 					break;
 
-				case 'c':
+				case 'c':  // Thống kê số lượng độc giả
 					printf("Thong ke so luong doc gia.\n");
 					thongKeSoLuongDocGia(indexDocGia);
 					break;
 
-				case 'd':
+				case 'd':   // Thống kê độc giả theo giới tính
 					printf("Thong ke so luong doc gia theo gioi tinh.\n");
 					thongKeSoLuongDocGiaTheoGioiTinh(gioiTinh, indexDocGia);
 					break;
 
-				case 'e':
+				case 'e':    // Thống kê số sách đang được mượn
 					printf("Thong ke so sach dang duoc muon.\n");
 					thongKeSoLuongSachDangMuon(
-						ISBN_SachMuon,indexThongTinMuonTraSach,soLuongSachMuon,
-						indexSach,ISBN,tenSach);
+						ISBN_SachMuon, indexThongTinMuonTraSach, soLuongSachMuon,
+						indexSach, ISBN, tenSach);
 					break;
 
-				case 'f':
+				case 'f':      // Thống kê độc giả bị trễ hạn
 					printf("Thong ke danh sach doc gia bi tre han.\n");
 					thongKeDocGiaTreHan(
 						maDocGiaMuonSach, hoTenMuonSach,
 						ngayTraSachDuKien, indexThongTinMuonTraSach, soLuongSachMuon);
 					break;
 
-				case 'g':
+				case 'g': // Thoát menu thống kê
 					isBreak = true;
 					break;
 				default:
@@ -304,7 +308,7 @@ void showMenu()
 
 			break;
 		}
-		case '6':
+		case '6':  // Thoát chương trình
 		{
 			printf("\n====================================\n");
 			printf("Thoat khoi chuong trinh.\n");
@@ -316,7 +320,7 @@ void showMenu()
 			printf("Lua chon khong hop le! Vui long thu lai.\n");
 			break;
 		}
-			//}*/
+			
 		}
 	} while (!isFinshed);
 
@@ -326,8 +330,12 @@ void showMenu()
 	printf("\n\n");
 }
 
+// Hàm main: Khởi tạo dữ liệu mẫu và chạy chương trình
 int main()
 {
+	 // Hiển thị poster
+
+	// Khởi tạo dữ liệu mẫu cho độc giả
 	hienThiPoster();
 	indexDocGia = 5;
 	maDocGia[0] = 1001;
@@ -380,6 +388,7 @@ int main()
 	strcpy_s(ngayMoThe[4], "05-05-2024");
 	strcpy_s(ngayKetThucThe[4], "05-05-2028");
 
+	 // Khởi tạo dữ liệu mẫu cho sách
 	indexSach = 5;
 	ISBN[0] = 1111;
 	strcpy_s(tenSach[0], "Lap Trinh C++");
@@ -426,7 +435,7 @@ int main()
 	giaSach[4] = 300000.0;
 	soLuongSach[4] = 12;
 
-	// Giả sử indexThongTinMuonTraSach = 5;
+	 // Khởi tạo dữ liệu mẫu cho phiếu mượn trả sách
 	indexThongTinMuonTraSach = 3;
 
 	// Thông tin mượn trả cho độc giả ở index 0:
@@ -468,7 +477,7 @@ int main()
 	ISBN_SachMuon[2][2] = 5555;
 	strcpy_s(tenSachMuon[2][2], MAX_STR, "Co So Du Lieu");
 
-	showMenu();
+	showMenu(); // Chạy menu chính
 
 	return 0;
 }

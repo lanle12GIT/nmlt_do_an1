@@ -2,6 +2,7 @@
 #include "HeaderSach.h"
 #include <string.h>
 
+// Hàm hiển thị tiêu đề bảng sách
 void hienThiTieuDeSach()
 {
     printf("+-----+-------+----------------------------------+-----------------+-----------------+------+---------------+------------+----------+\n");
@@ -10,6 +11,7 @@ void hienThiTieuDeSach()
     printf("+-----+-------+----------------------------------+-----------------+-----------------+------+---------------+------------+----------+\n");
 }
 
+// Hàm hiển thị thông tin sách 
 void hienThiTatCaSach(
     int ISBN[], char tenSach[][MAX_STR],
     char tacGia[][MAX_STR], char nhaXuatBan[][MAX_STR],
@@ -17,9 +19,10 @@ void hienThiTatCaSach(
     float giaSach[], int soLuongSach[],
     int indexSach)
 {
-    hienThiTieuDeSach();
+    hienThiTieuDeSach(); // In tiêu đề bảng
     for (int i = 0; i < indexSach; i++)
     {
+          // In thông tin từng cuốn sách
         printf("| %-4d| %-5d | %-32s | %-15s | %-15s | %-4d | %-13s | %-10.2f | %-8d |\n",
                i + 1,
                ISBN[i],
@@ -33,7 +36,8 @@ void hienThiTatCaSach(
     }
     printf("+-----+-------+----------------------------------+-----------------+-----------------+------+---------------+------------+----------+\n");
 }
-
+// Hàm hiển thị thông tin sách theo index
+// Hàm này được gọi khi thêm sách mới hoặc chỉnh sửa thông tin sách
 void hienThiSachTheoIndex(int ISBN[], char tenSach[][MAX_STR],
                           char tacGia[][MAX_STR], char nhaXuatBan[][MAX_STR],
                           int namXuatBan[], char theLoai[][MAX_STR],
@@ -53,6 +57,7 @@ void hienThiSachTheoIndex(int ISBN[], char tenSach[][MAX_STR],
     printf("+-----+-------+----------------------------------+-----------------+-----------------+------+---------------+------------+----------+\n");
 }
 
+// Hàm thêm sách mới vào thư viện
 void themSach(
     int ISBN[], char tenSach[][MAX_STR],
     char tacGia[][MAX_STR], char nhaXuatBan[][MAX_STR],
@@ -60,13 +65,14 @@ void themSach(
     float giaSach[], int soLuongSach[],
     int *indexSach)
 {
+     // Kiểm tra số lượng sách đã đạt tối đa chưa
     if (*indexSach >= MAX_SACH)
     {
         printf("Khong the them sach moi. So luong sach da dat toi da.\n");
         return;
     }
     else
-    {
+    {   // Nhập mã ISBN và kiểm tra trùng lặp
         while (1)
         {
             printf(">>>>> Nhap ma ISBN: ");
@@ -77,7 +83,7 @@ void themSach(
             {
                 if (ISBN[i] == temp)
                 {
-                    printf("Ma ISBN nay da ton tai, vui long nhap lai\n");
+                    printf("Ma ISBN nay da ton tai, vui long nhap lai\n"); // mỗi sách phải có 1 mã ISBN duy nhất
                     isTonTai = true;
                 }
             }
@@ -90,21 +96,22 @@ void themSach(
         while (getchar() != '\n')
             ;
 
-        printf(">>>>> Nhap ten sach: ");
+        // Nhập các thông tin khác của sách
+        printf(">>>>> Nhap ten sach (vi du: Mua he 17): ");
         gets_s(tenSach[*indexSach], MAX_STR);
 
-        printf(">>>>> Nhap tac gia: ");
+        printf(">>>>> Nhap tac gia (vi du: Nguyen Nhat Anh): ");
         gets_s(tacGia[*indexSach], MAX_STR);
 
-        printf(">>>>> Nhap nha xuat ban: ");
+        printf(">>>>> Nhap nha xuat ban (vi du: NXB Nhi Dong): ");
         gets_s(nhaXuatBan[*indexSach], MAX_STR);
 
-        printf(">>>>> Nhap nam xuat ban: ");
+        printf(">>>>> Nhap nam xuat ban (vi du: 2019): ");
         scanf_s("%d", &namXuatBan[*indexSach]);
         while (getchar() != '\n')
             ;
 
-        printf(">>>>> Nhap the loai: ");
+        printf(">>>>> Nhap the loai (vi du:Truyen ngan): ");
         gets_s(theLoai[*indexSach], MAX_STR);
 
         printf(">>>>> Nhap gia sach: ");
@@ -112,17 +119,19 @@ void themSach(
         while (getchar() != '\n')
             ;
 
-        printf(">>>>> Nhap so luong sach: ");
+        printf(">>>>> Nhap so luong sach (vi du:150000): ");
         scanf_s("%d", &soLuongSach[*indexSach]);
         while (getchar() != '\n')
             ;
 
+            // Thông báo và hiển thị sách vừa thêm
         printf("Them sach thanh cong \n");
         hienThiTieuDeSach();
         hienThiSachTheoIndex(ISBN, tenSach, tacGia, nhaXuatBan, namXuatBan, theLoai, giaSach, soLuongSach, *indexSach);
         (*indexSach)++;
     }
 }
+// Hàm chỉnh sửa thông tin sách
 void chinhSuaSach(
     int ISBN[], char tenSach[][MAX_STR],
     char tacGia[][MAX_STR], char nhaXuatBan[][MAX_STR],
@@ -145,6 +154,7 @@ void chinhSuaSach(
             hienThiTieuDeSach();
             hienThiSachTheoIndex(ISBN, tenSach, tacGia, nhaXuatBan, namXuatBan, theLoai, giaSach, soLuongSach, i);
 
+              // Hiển thị menu lựa chọn trường cần chỉnh sửa
             printf("=== Chon thong tin muon thay doi===\n");
             printf("1. Ten sach\n");
             printf("2. Tac gia\n");
@@ -210,6 +220,7 @@ void chinhSuaSach(
         printf("Khong tim thay sach co ma ISBN %d\n", maISBN);
     }
 }
+// Hàm xóa sách khỏi danh sách
 void xoaSach(
     int ISBN[], char tenSach[][MAX_STR],
     char tacGia[][MAX_STR], char nhaXuatBan[][MAX_STR],
@@ -274,7 +285,7 @@ void xoaSach(
         printf("Khong tim thay sach co ma ISBN %d\n", maISBN);
     }
 }
-
+// Hàm tìm kiếm sách theo ISBN
 void timKiemSachTheoISBN(
     int ISBN[], char tenSach[][MAX_STR],
     char tacGia[][MAX_STR], char nhaXuatBan[][MAX_STR],
@@ -304,6 +315,7 @@ void timKiemSachTheoISBN(
         printf("Khong tim thay sach co ma ISBN %d\n", maISBN);
     }
 }
+// Hàm tìm kiếm sách theo tên sách
 void timKiemSachTheoTenSach(
     int ISBN[], char tenSach[][MAX_STR],
     char tacGia[][MAX_STR], char nhaXuatBan[][MAX_STR],
